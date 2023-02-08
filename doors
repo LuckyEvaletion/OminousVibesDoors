@@ -1,1 +1,2380 @@
+local a=game:GetService"Players"
+local b=game:GetService"ReplicatedStorage"
+local c=game:GetService"RunService"
+local d=game:GetService"SoundService"
+local e=game:GetService"Workspace"
+local f=game:GetService"VirtualInputManager"
 
+
+
+
+
+
+
+local g="Doors"
+local h="Hotel v5.3"
+local i="TerminalVibes/doors"
+local j="hotel"
+
+local k={[6839171747]=5924}
+
+
+local l=0.2
+local m={["Knobs"]=true,["ChestBox"]=true,["RolltopContainer"]=true}
+local n={
+["Vitamins"]=true,
+["Lockpick"]=true,
+["Candle"]=true,
+["Lighter"]=true,
+["Battery"]=true,
+["Bandage"]=true,
+}
+
+
+
+
+
+
+
+do
+local o=game.PlaceId
+local p=game.PlaceVersion
+local q=k[o]
+if not q then
+warn"Script does not support this place instance."
+warn"The PlaceID and version has been set to your clipboard. Please report this to the developer."
+return setclipboard("["..tostring(o).."] = "..tostring(p)..",")
+end
+end
+do
+local o=j..h
+if getgenv()[o]then
+return
+end
+getgenv()[o]=true
+end
+
+
+
+
+
+
+
+local o="https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/"
+
+local p=loadstring(game:HttpGet(o.."Library.lua"))()
+local q=loadstring(game:HttpGet(o.."addons/SaveManager.lua"))()
+local r=loadstring(game:HttpGet(o.."addons/ThemeManager.lua"))()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+local s
+do
+local t,u=type,typeof
+s=setmetatable({},{
+__tostring=function()
+return"Bin"
+end,
+})
+s.__index=s
+function s.new(...)
+local v=setmetatable({},s)
+return v:constructor(...)or v
+end
+function s.constructor(v)end
+function s.add(v,w,x)
+local y={
+item=w,
+method=x,
+}
+if v.head==nil then
+v.head=y
+end
+if v.tail then
+v.tail.next=y
+end
+v.tail=y
+return w
+end
+function s.destroy(v)
+while v.head do
+local w=v.head.item
+local x=v.head.method
+if x then
+w[x](w)
+elseif t(w)=="function"then
+w()
+elseif u(w)=="RBXScriptConnection"then
+w:Disconnect()
+elseif t(w)=="thread"then
+task.cancel(w)
+elseif w.destroy~=nil then
+w:destroy()
+elseif w.Destroy~=nil then
+w:Destroy()
+end
+v.head=v.head.next
+end
+end
+function s.isEmpty(v)
+return v.head==nil
+end
+end
+
+
+
+local t
+do
+t={}
+t.__index=t
+function t.__tostring(u)
+return"BaseComponent - "..u.instance:GetFullName()
+end
+
+
+local u,v,w=setmetatable,assert,task.defer
+
+
+function t.new(x,...)
+local y=u({},t)
+y=y:constructor(x,...)or y
+y:run()
+return y
+end
+
+
+function t.constructor(x,y,...)
+x.instance=y
+x.running=false
+x.destructed=false
+x._maid=s.new()
+x._maid:add(y.Destroying:Connect(function()
+if not x.destructed then
+x:destroy()
+end
+end))
+end
+
+
+function t.onStart(x)end
+
+
+function t.run(x)
+v(not x.running,"["..x:__tostring().."] is already running")
+w(function()
+x.running=true
+if not x.destructed then
+x:onStart()
+end
+end)
+end
+
+function t.destroy(x)
+v(not x.destructed,"["..x:__tostring().."] is already destroyed")
+x.running=false
+x.destructed=true
+x._maid:destroy()
+end
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+local u=a.LocalPlayer
+local v=u:WaitForChild"PlayerGui"
+local w=e.CurrentCamera
+
+local x=b:WaitForChild"GameData"
+
+
+
+
+local y={}
+
+
+
+
+
+
+do
+local z=b:WaitForChild"EntityInfo"
+local A={
+PadlockHint=z:WaitForChild"PadlockHint",
+EngageMinigame=z:WaitForChild"EngageMinigame",
+ClutchHeartbeat=z:WaitForChild"ClutchHeartbeat",
+Screech=z:WaitForChild"Screech",
+SpiderJumpscare=z:WaitForChild"SpiderJumpscare",
+}
+for B,C in pairs(A)do
+y[B]=C
+end
+end
+
+local z=Instance.new"Sound"
+
+local A={}
+local B={}
+local C={}
+
+local D=s.new()
+local E=s.new()
+
+
+local F
+local G
+local H
+local I
+local J
+local K
+local L
+local M
+local N
+local O
+local P
+local Q
+local R
+local S
+
+local T={}
+local U={}
+local V={}
+
+
+
+
+
+
+
+local W={}local aa=function(
+X, Y)
+local Z=0.12
+
+local _=s.new()
+local aa=Drawing.new"Text"
+local ab=Drawing.new"Square"
+local ac=Drawing.new"Square"
+_:add(aa,"Remove")
+_:add(ab,"Remove")
+_:add(ac,"Remove")
+
+aa.Text=X or""
+aa.Color=Color3.fromRGB(255,255,255)
+aa.ZIndex=3
+
+ab.Color=Color3.fromRGB(25,25,25)
+ab.Filled=true
+ab.Thickness=0
+ab.Size=aa.TextBounds+Vector2.new(10,8)
+ab.ZIndex=2
+
+ac.Color=Color3.fromRGB(0,100,255)
+ac.Filled=true
+ac.Thickness=0
+ac.Size=Vector2.new(2,24)
+ac.ZIndex=1
+
+local ad=0
+for ae in pairs(W)do
+ad=math.max(ad,ae+1)
+end
+W[ad]=_
+
+local af=0
+local ag,ah,ai=pairs(W)
+_:add(c.RenderStepped:Connect(function(aj)
+af+=aj
+
+local ak,al=ag(ah,ai)
+local am=ak or 0
+while ak~=nil do
+am=math.min(am,ak)
+ak,al=ag(ah,ak)
+end
+
+local an=ad-am
+local ao=5
+if af<=Z then
+ao=-(ab.Size.X+2)+(af/Z)*(ab.Size.X+7)
+elseif af>=Y-Z then
+ao=5-(af-(Y-Z))/Z*(ab.Size.X+7)
+end
+
+local ap=Vector2.new(ao,40+(an*25))
+aa.Position=ap+Vector2.new(7,4)
+ab.Position=ap+Vector2.new(2,0)
+ac.Position=ap
+end))
+_:add(c.RenderStepped:Once(function(aj)
+aa.Visible=true
+ab.Visible=true
+ac.Visible=true
+end))
+task.delay(Y,function()
+_:destroy()
+W[ad]=nil
+end)end local ab=function(
+
+
+ab, ac)
+if ab and Toggles["alerts.enabled"].Value then
+local ad={
+message=ac.message or"",
+audio=ac.audio or false,
+duration=ac.duration or 5,
+}
+
+if Toggles["alerts.drawing"].Value then
+aa(ad.message,ad.duration)
+else
+p:Notify(ad.message,ad.duration)
+end
+if ad.audio and Toggles["alerts.audio"].Value then
+z.TimePosition=0.25
+z:Play()
+end
+end end
+
+
+local ac=function(ac)
+local ad={}
+for ae,af in ipairs(getconnections(y.Screech.OnClientEvent))do
+local ag=af.Function
+if ag then
+local ah=getfenv(ag).script
+if ah and ah.Name=="RemoteListener"then
+table.insert(ad,af)
+end
+end
+end
+
+if ac then
+for ag,ah in ipairs(ad)do
+ah:Disable()
+end
+else
+for ag,ah in ipairs(ad)do
+ah:Enable()
+end
+end
+end
+
+local ad=function(ad)
+local ae={}
+for af,ag in ipairs(getconnections(y.SpiderJumpscare.OnClientEvent))do
+local ah=ag.Function
+if ah then
+local ai=getfenv(ah).script
+if ai and ai.Name=="RemoteListener"then
+table.insert(ae,ag)
+end
+end
+end
+
+if ad then
+for ah,ai in ipairs(ae)do
+ai:Disable()
+end
+else
+for ah,ai in ipairs(ae)do
+ai:Enable()
+end
+end
+end
+
+
+
+
+
+
+
+
+
+do
+local ae=t
+F=setmetatable({},{__index=ae})
+F.__index=F
+
+function F.__tostring(af)
+return"CharacterComponent - "..af.instance:GetFullName()
+end
+F.attached={}
+
+
+function F.new(af,...)
+local ag=setmetatable({},F)
+ag=ag:constructor(af,...)or ag
+ag:run()
+return ag
+end
+
+
+function F.constructor(af,ag)
+ae.constructor(af,ag)
+af.client=I.attached[a:GetPlayerFromCharacter(ag)]
+af.root=ag:WaitForChild("HumanoidRootPart",5)
+af.humanoid=ag:WaitForChild("Humanoid",5)
+
+assert(af.client~=nil,"["..af:__tostring().."] is not a client's character")
+assert(af.root~=nil,"["..af:__tostring().."] is missing a HumanoidRootPart")
+assert(af.humanoid~=nil,"["..af:__tostring().."] is missing a Humanoid")
+
+af._maid:add(ag.AncestryChanged:Connect(function(ah,ai)
+if ai==nil then
+af:destroy()
+end
+end))
+end
+
+
+function F.onStart(af)
+F.attached[af.instance]=af
+ae.onStart(af)
+end
+
+
+function F.destroy(af)
+F.attached[af.instance]=nil
+ae.destroy(af)
+end
+end
+
+
+
+do
+
+local ae=Vector3.new(1,0,1)
+
+local af=F
+G=setmetatable({},{__index=af})
+G.__index=G
+
+function G.__tostring(ag)
+return"AvatarComponent - "..ag.instance:GetFullName()
+end
+G.attached=nil
+
+
+function G.new(ag,...)
+local ah=setmetatable({},G)
+ah=ah:constructor(ag,...)or ah
+ah:run()
+return ah
+end
+
+
+function G.constructor(ag,ah)
+af.constructor(ag,ah)
+ag.parts={
+ag._maid:add(Instance.new"Part"),
+ag._maid:add(Instance.new"Part"),
+ag._maid:add(Instance.new"Part"),
+ag._maid:add(Instance.new"Part"),
+}
+ag.lights={
+ag._maid:add(Instance.new"PointLight"),
+ag._maid:add(Instance.new"PointLight"),
+ag._maid:add(Instance.new"PointLight"),
+ag._maid:add(Instance.new"PointLight"),
+}
+end
+
+
+function G.onStart(ag)
+G.attached=ag
+af.onStart(ag)
+
+for ah =1,4 do
+local ai=ag.parts[ah]
+local aj=ag.lights[ah]
+local ak=ag._maid:add(Instance.new"WeldConstraint")
+
+ai.Size=Vector3.zero
+ai.Massless=true
+ai.CanCollide=false
+ai.CanTouch=false
+ai.CanQuery=false
+
+aj.Enabled=false
+aj.Range=60
+aj.Color=Color3.new(1,1,1)
+aj.Shadows=false
+
+ak.Part0=ag.root
+ak.Part1=ai
+
+ai.Parent=e
+aj.Parent=ai
+ak.Parent=ai
+end
+
+for ah,ai in ipairs(ag.parts)do
+local aj=(ah-1)*math.pi/2
+ai.Position=ag.root.Position+Vector3.new(math.cos(aj)*25,5,math.sin(aj)*25)
+end
+
+while ag.running do
+for aj =1,4 do
+local ak=ag.lights[aj]
+ak.Enabled=Toggles["character.glow.enabled"].Value
+ak.Brightness=Options["character.glow.brightness"].Value/50
+end
+task.wait(0.5)
+end
+end
+
+function G.onPhysics(ag,ah,ai)
+local aj=Options["character.sprint.speed"].Value
+if
+aj>0
+and Toggles["character.sprint.enabled"].Value
+and Options["character.sprint.keybind"]:GetState()
+then
+local ak=ag.humanoid.MoveDirection*ae
+if ak.Magnitude>0 then
+ag.instance:TranslateBy(ak*aj*ai)
+end
+end
+end
+
+
+function G.destroy(ag)
+G.attached=nil
+af.destroy(ag)
+end
+end
+
+
+
+do
+
+local ae=Vector3.new(5,7,0)
+local af=Vector3.new(0,-0.25,0)
+local ag,ah,ai,aj=
+CFrame.new(af.X-(ae.X/2),af.Y+(ae.Y/2),af.Z),
+CFrame.new(af.X+(ae.X/2),af.Y+(ae.Y/2),af.Z),
+CFrame.new(af.X-(ae.X/2),af.Y-(ae.Y/2),af.Z),
+CFrame.new(af.X+(ae.X/2),af.Y-(ae.Y/2),af.Z)
+local ak=w.WorldToViewportPoint
+local al=Vector2.new
+local am=math.min
+
+local an=F
+H=setmetatable({},{__index=an})
+H.__index=H
+
+function H.__tostring(ao)
+return"FriendComponent - "..ao.instance:GetFullName()
+end
+H.attached={}
+
+
+function H.new(ao,...)
+local ap=setmetatable({},H)
+ap=ap:constructor(ao,...)or ap
+ap:run()
+return ap
+end
+
+
+function H.constructor(ao,ap)
+an.constructor(ao,ap)
+ao.quad=Drawing.new"Quad"
+ao._maid:add(ao.quad,"Remove")
+end
+
+
+function H.onStart(ao)
+H.attached[ao.instance]=ao
+an.onStart(ao)
+
+local ap=ao.quad
+ap.Visible=false
+ap.Thickness=1
+ap.Transparency=0.75
+end
+
+function H.onRender(ao,ap)
+local X=ao.quad
+if Toggles["esp.player.enabled"].Value then
+local Y=ao.root.CFrame
+local Z=ak(w,(Y*ag).Position)
+local _=ak(w,(Y*ah).Position)
+local aq=ak(w,(Y*aj).Position)
+local ar=ak(w,(Y*ai).Position)
+if am(Z.Z,_.Z,aq.Z,ar.Z)>0 then
+X.PointA=al(_.X,_.Y)
+X.PointB=al(Z.X,Z.Y)
+X.PointC=al(ar.X,ar.Y)
+X.PointD=al(aq.X,aq.Y)
+X.Color=Options["esp.player.color"].Value
+X.Visible=true
+else
+X.Visible=false
+end
+else
+X.Visible=false
+end
+end
+
+
+function H.destroy(ao)
+H.attached[ao.instance]=nil
+an.destroy(ao)
+end
+end
+
+
+
+do
+local ae=t
+I=setmetatable({},{__index=ae})
+I.__index=I
+
+function I.__tostring(af)
+return"ClientComponent - "..af.instance:GetFullName()
+end
+I.attached={}
+
+
+function I.new(af,...)
+local ag=setmetatable({},I)
+ag=ag:constructor(af,...)or ag
+ag:run()
+return ag
+end
+
+
+function I.constructor(af,ag)
+ae.constructor(af,ag)
+end
+
+
+function I.onStart(af)
+I.attached[af.instance]=af
+ae.onStart(af)
+af._maid:add(af.instance.CharacterAdded:Connect(function(ag)
+af:onCharacter(ag)
+end))
+af._maid:add(af.instance.Backpack.ChildAdded:Connect(function(ag)
+if ag:IsA"Tool"then
+af:onTool(ag)
+end
+end))
+task.defer(function()
+local ag=af.instance.Character
+if ag then
+af:onCharacter(ag)
+end
+end)
+task.defer(function()
+for ag,ah in ipairs(af.instance.Backpack:GetChildren())do
+if ah:IsA"Tool"then
+af:onTool(ah)
+end
+end
+end)
+end
+
+function I.onCharacter(af,ag)
+if af.instance==u then
+af.character=G.new(ag)
+else
+af.character=H.new(ag)
+end
+end
+
+function I.onTool(af,ag)
+if ag.Name=="LibraryHintPaper"then
+local ah=ag:WaitForChild("UI",1)
+if ah then
+local ai={}
+for aj =1,5 do
+local ak=ah:FindFirstChild(tostring(aj))
+if ak then
+local al=ak.ImageRectOffset.X/50
+ai[aj]=al
+end
+end
+B=ai
+end
+end
+end
+
+
+function I.destroy(af)
+I.attached[af.instance]=nil
+ae.destroy(af)
+end
+
+
+local af=function(af)
+I.new(af)
+end
+
+a.PlayerAdded:Connect(af)
+for ag,ah in ipairs(a:GetPlayers())do
+task.defer(af,ah)
+end
+end
+
+
+
+do
+
+local ae=w.WorldToViewportPoint
+local af,ag,ah=Vector2.new,Vector3.new,CFrame.Angles
+
+local ai=t
+J=setmetatable({},{__index=ai})
+J.__index=J
+
+function J.__tostring(aj)
+return"ScreechComponent - "..aj.instance:GetFullName()
+end
+J.attached={}
+
+
+function J.new(aj,...)
+local ak=setmetatable({},J)
+ak=ak:constructor(aj,...)or ak
+ak:run()
+return ak
+end
+
+
+function J.constructor(aj,ak)
+ai.constructor(aj,ak)
+aj.root=ak:WaitForChild"Root"
+aj.line=Drawing.new"Line"
+aj.outline=Drawing.new"Line"
+aj._maid:add(aj.line,"Remove")
+aj._maid:add(aj.outline,"Remove")
+end
+
+
+function J.onStart(aj)
+J.attached[aj.instance]=aj
+ai.onStart(aj)
+
+local ak,al=aj.line,aj.outline
+ak.Visible=false
+ak.Color=Options["esp.screech.color"].Value
+ak.ZIndex=1
+ak.Thickness=1
+
+al.Visible=false
+al.Color=Color3.new()
+al.ZIndex=0
+al.Thickness=2
+end
+
+function J.onRender(aj,ak)
+local al=Toggles["esp.screech.enabled"].Value
+local am,an=aj.line,aj.outline
+if al then
+local ao=aj.root.Position
+local ap=ae(w,ao)
+if ap.Z<0 then
+local aq=w.CFrame:PointToObjectSpace(ao)
+local ar=math.atan2(aq.Y,aq.X)+math.pi
+aq=ah(0,0,ar):VectorToWorldSpace(
+(ah(0,math.rad(89.9),0):VectorToWorldSpace(ag(0,0,-1)))
+)
+ap=ae(w,w.CFrame:PointToWorldSpace(aq))
+end
+
+local aq=w.ViewportSize
+am.From=af(aq.X/2,aq.Y*0.75)
+am.To=af(ap.X,ap.Y)
+an.From=am.From
+an.To=am.To
+end
+am.Visible=al
+an.Visible=al
+end
+
+
+function J.destroy(aj)
+J.attached[aj.instance]=nil
+ai.destroy(aj)
+end
+end
+
+
+
+do
+
+local ae=Vector3.new(4,6,0)
+local af=Vector3.new(0,0,0)
+local ag,ah,ai,aj=
+CFrame.new(af.X-(ae.X/2),af.Y+(ae.Y/2),af.Z),
+CFrame.new(af.X+(ae.X/2),af.Y+(ae.Y/2),af.Z),
+CFrame.new(af.X-(ae.X/2),af.Y-(ae.Y/2),af.Z),
+CFrame.new(af.X+(ae.X/2),af.Y-(ae.Y/2),af.Z)
+local ak=w.WorldToViewportPoint
+local al=Vector2.new
+local am=math.min
+
+local an=t
+K=setmetatable({},{__index=an})
+K.__index=K
+
+function K.__tostring(ao)
+return"RushComponent - "..ao.instance:GetFullName()
+end
+K.attached={}
+
+
+function K.new(ao,...)
+local ap=setmetatable({},K)
+ap=ap:constructor(ao,...)or ap
+ap:run()
+return ap
+end
+
+
+function K.constructor(ao,ap)
+an.constructor(ao,ap)
+ao.root=ap.PrimaryPart or ap:WaitForChild("RushNew",5)
+assert(ao.root,"["..ao:__tostring().."] is missing a root part!")
+
+ao.name=ao.instance.Name=="RushMoving"and"Rush"or"Ambush"
+ao.quad=Drawing.new"Quad"
+ao._maid:add(ao.quad,"Remove")
+end
+
+
+function K.onStart(ao)
+K.attached[ao.instance]=ao
+an.onStart(ao)
+
+local ap=ao.quad
+ap.Visible=false
+ap.Thickness=1
+ap.Color=ao.name=="Rush"and Options["esp.rush.rush-color"].Value
+or Options["esp.rush.ambush-color"].Value
+
+task.delay(0.5,function()
+local aq=(G.attached.root.Position-ao.root.Position).Magnitude
+if aq<=750 then
+ab(Toggles["alerts.entity"].Value,{
+message=ao.name=="Rush"and"Rush spawned, hide in a Wardrobe or get behind cover!"
+or"Ambush spawned, hide in a Wardrobe or get behind cover! Ambush can return up to 4 times.",
+audio=true,
+duration=10,
+})
+else
+ao:destroy()
+end
+end)
+end
+
+function K.onRender(ao,ap)
+local aq=ao.quad
+if Toggles["esp.rush.enabled"].Value then
+local ar=ao.root.CFrame
+local X=ak(w,(ar*ag).Position)
+local Y=ak(w,(ar*ah).Position)
+local Z=ak(w,(ar*aj).Position)
+local _=ak(w,(ar*ai).Position)
+if am(X.Z,Y.Z,Z.Z,_.Z)>0 then
+aq.PointA=al(Y.X,Y.Y)
+aq.PointB=al(X.X,X.Y)
+aq.PointC=al(_.X,_.Y)
+aq.PointD=al(Z.X,Z.Y)
+aq.Visible=true
+else
+aq.Visible=false
+end
+else
+aq.Visible=false
+end
+end
+
+
+function K.destroy(ao)
+K.attached[ao.instance]=nil
+an.destroy(ao)
+end
+end
+
+
+
+do
+
+local ae=Vector3.new(6,13,0)
+local af=Vector3.new(0,-1,0)
+local ag,ah,ai,aj=
+CFrame.new(af.X-(ae.X/2),af.Y+(ae.Y/2),af.Z),
+CFrame.new(af.X+(ae.X/2),af.Y+(ae.Y/2),af.Z),
+CFrame.new(af.X-(ae.X/2),af.Y-(ae.Y/2),af.Z),
+CFrame.new(af.X+(ae.X/2),af.Y-(ae.Y/2),af.Z)
+local ak=w.WorldToViewportPoint
+local al=Vector2.new
+local am=math.min
+
+local an=t
+L=setmetatable({},{__index=an})
+L.__index=L
+
+function L.__tostring(ao)
+return"FigureComponent - "..ao.instance:GetFullName()
+end
+L.attached={}
+
+
+function L.new(ao,...)
+local ap=setmetatable({},L)
+ap=ap:constructor(ao,...)or ap
+ap:run()
+return ap
+end
+
+
+function L.constructor(ao,ap)
+an.constructor(ao,ap)
+ao.ragdoll=ap:WaitForChild("FigureRagdoll",2.5)
+assert(ao.ragdoll~=nil,"["..ao:__tostring().."] is missing its ragdoll!")
+ao.root=ao.ragdoll:WaitForChild("Root",2.5)
+assert(ao.root~=nil,"["..ao:__tostring().."] is missing its root part!")
+
+ao.quad=Drawing.new"Quad"
+ao._maid:add(ao.quad,"Remove")
+end
+
+
+function L.onStart(ao)
+L.attached[ao.instance]=ao
+an.onStart(ao)
+
+local ap=ao.quad
+ap.Visible=false
+ap.Thickness=2
+end
+
+function L.onRender(ao,ap)
+local aq=ao.quad
+if Toggles["esp.figure.enabled"].Value then
+local ar=ao.root.CFrame
+local X=ak(w,(ar*ag).Position)
+local Y=ak(w,(ar*ah).Position)
+local Z=ak(w,(ar*aj).Position)
+local _=ak(w,(ar*ai).Position)
+if am(X.Z,Y.Z,Z.Z,_.Z)>0 then
+aq.PointA=al(Y.X,Y.Y)
+aq.PointB=al(X.X,X.Y)
+aq.PointC=al(_.X,_.Y)
+aq.PointD=al(Z.X,Z.Y)
+aq.Color=Options["esp.figure.color"].Value
+aq.Visible=true
+else
+aq.Visible=false
+end
+else
+aq.Visible=false
+end
+end
+
+
+function L.destroy(ao)
+L.attached[ao.instance]=nil
+an.destroy(ao)
+end
+end
+
+
+
+do
+
+local ae=w.WorldToViewportPoint
+local af=Vector2.new
+local ag,ah,ai=af(-8,-6),af(8,-6),af(0,8)
+
+local aj=t
+M=setmetatable({},{__index=aj})
+M.__index=M
+
+function M.__tostring(ak)
+return"SnareComponent - "..ak.instance:GetFullName()
+end
+M.attached={}
+
+
+function M.new(ak,...)
+local al=setmetatable({},M)
+al=al:constructor(ak,...)or al
+al:run()
+return al
+end
+
+
+function M.constructor(ak,al)
+aj.constructor(ak,al)
+ak.root=al:WaitForChild("Base",2.5)
+ak.triangle=Drawing.new"Triangle"
+ak.outline=Drawing.new"Triangle"
+ak._maid:add(ak.triangle,"Remove")
+ak._maid:add(ak.outline,"Remove")
+end
+
+
+function M.onStart(ak)
+M.attached[ak.instance]=ak
+aj.onStart(ak)
+
+local al,am=ak.triangle,ak.outline
+
+al.Thickness=1
+al.Filled=true
+al.Visible=false
+
+am.Color=Color3.new()
+am.Thickness=1.5
+am.Filled=false
+am.Visible=false
+am.ZIndex=2
+end
+
+function M.onRender(ak,al)
+local am,an=ak.triangle,ak.outline
+if Toggles["esp.snare.enabled"].Value then
+local ao=ae(w,ak.root.Position)
+local ap=ao.Z>0
+if ap then
+local aq=af(ao.X,ao.Y)
+am.PointA=aq+ag
+am.PointB=aq+ah
+am.PointC=aq+ai
+an.PointA=am.PointA
+an.PointB=am.PointB
+an.PointC=am.PointC
+am.Color=Options["esp.snare.color"].Value
+end
+am.Visible=ap
+an.Visible=ap
+else
+am.Visible=false
+an.Visible=false
+end
+end
+
+
+function M.destroy(ak)
+M.attached[ak.instance]=nil
+aj.destroy(ak)
+end
+end
+
+
+
+do
+
+local ae=CFrame.new(0,0,1)
+local af=w.WorldToViewportPoint
+local ag=Vector2.new
+local ah=math.min
+
+local ai=t
+N=setmetatable({},{__index=ai})
+N.__index=N
+
+function N.__tostring(aj)
+return"DoorComponent - "..aj.instance:GetFullName()
+end
+N.attached={}
+
+
+function N.new(aj,...)
+local ak=setmetatable({},N)
+ak=ak:constructor(aj,...)or ak
+ak:run()
+return ak
+end
+
+
+function N.constructor(aj,ak,al)
+ai.constructor(aj,ak)
+aj.id=al or 0
+
+local am=ak.Size*0.5
+local an=ak.CFrame*ae
+aj.tl=(an*CFrame.new(am.X,am.Y,0)).Position
+aj.tr=(an*CFrame.new(-am.X,am.Y,0)).Position
+aj.bl=(an*CFrame.new(am.X,-am.Y,0)).Position
+aj.br=(an*CFrame.new(-am.X,-am.Y,0)).Position
+
+aj.quad=Drawing.new"Quad"
+aj._maid:add(aj.quad,"Remove")
+end
+
+
+function N.onStart(aj)
+N.attached[aj.instance]=aj
+ai.onStart(aj)
+
+local ak=aj.quad
+ak.Visible=false
+ak.Thickness=2
+end
+
+function N.onRender(aj,ak)
+local al=aj.quad
+if Toggles["esp.door.enabled"].Value then
+local am=af(w,aj.tl)
+local an=af(w,aj.tr)
+local ao=af(w,aj.br)
+local ap=af(w,aj.bl)
+if ah(am.Z,an.Z,ao.Z,ap.Z)>0 then
+al.PointA=ag(an.X,an.Y)
+al.PointB=ag(am.X,am.Y)
+al.PointC=ag(ap.X,ap.Y)
+al.PointD=ag(ao.X,ao.Y)
+
+local aq=aj.id-x.LatestRoom.Value
+if aq==0 then
+al.Color=Options["esp.door.target-color"].Value
+else
+al.Color=Options["esp.door.default-color"].Value
+if aq<0 then
+al.Transparency=0.5
+else
+al.Transparency=1.0
+end
+end
+
+al.Visible=true
+else
+al.Visible=false
+end
+else
+al.Visible=false
+end
+end
+
+
+function N.destroy(aj)
+N.attached[aj.instance]=nil
+ai.destroy(aj)
+end
+end
+
+
+
+do
+
+local ae=Vector3.new(6.4,9.5,0)
+local af=Vector3.new(0,0,-0.5)
+local ag,ah,ai,aj=
+CFrame.new(af.X-(ae.X/2),af.Y+(ae.Y/2),af.Z),
+CFrame.new(af.X+(ae.X/2),af.Y+(ae.Y/2),af.Z),
+CFrame.new(af.X-(ae.X/2),af.Y-(ae.Y/2),af.Z),
+CFrame.new(af.X+(ae.X/2),af.Y-(ae.Y/2),af.Z)
+local ak=w.WorldToViewportPoint
+local al=Vector2.new
+local am=math.min
+
+local an=t
+O=setmetatable({},{__index=an})
+O.__index=O
+
+function O.__tostring(ao)
+return"WardrobeComponent - "..ao.instance:GetFullName()
+end
+O.attached={}
+
+
+function O.new(ao,...)
+local ap=setmetatable({},O)
+ap=ap:constructor(ao,...)or ap
+ap:run()
+return ap
+end
+
+
+function O.constructor(ao,ap,aq)
+an.constructor(ao,ap)
+ao.id=aq
+ao.root=ap:WaitForChild("Main",5)
+ao.occupant=ap:WaitForChild("HiddenPlayer",5)
+
+ao.quad=Drawing.new"Quad"
+ao._maid:add(ao.quad,"Remove")
+end
+
+
+function O.onStart(ao)
+O.attached[ao.instance]=ao
+an.onStart(ao)
+
+local ap=ao.quad
+ap.Visible=false
+ap.Thickness=2
+end
+
+function O.onRender(ao,ap)
+local aq=ao.quad
+if Toggles["esp.wardrobe.enabled"].Value then
+local ar=ao.root.CFrame
+local X=ak(w,(ar*ag).Position)
+local Y=ak(w,(ar*ah).Position)
+local Z=ak(w,(ar*aj).Position)
+local _=ak(w,(ar*ai).Position)
+if am(X.Z,Y.Z,Z.Z,_.Z)>0 then
+aq.PointA=al(Y.X,Y.Y)
+aq.PointB=al(X.X,X.Y)
+aq.PointC=al(_.X,_.Y)
+aq.PointD=al(Z.X,Z.Y)
+aq.Color=Options["esp.wardrobe.color"].Value
+if ao.occupant.Value then
+aq.Transparency=0.10
+elseif x.LatestRoom.Value-ao.id>1 then
+aq.Transparency=0.25
+else
+aq.Transparency=0.60
+end
+aq.Visible=true
+else
+aq.Visible=false
+end
+else
+aq.Visible=false
+end
+end
+
+
+function O.destroy(ao)
+O.attached[ao.instance]=nil
+an.destroy(ao)
+end
+end
+
+
+
+do
+
+local ae=w.WorldToViewportPoint
+local af=Vector2.new
+local ag=af(0,3)
+
+local ah=t
+P=setmetatable({},{__index=ah})
+P.__index=P
+
+function P.__tostring(ai)
+return"InteractableComponent - "..ai.instance:GetFullName()
+end
+P.attached={}
+
+
+function P.new(ai,aj,...)
+local ak=setmetatable({},P)
+ak=ak:constructor(ai,aj,...)or ak
+ak:run()
+return ak
+end
+
+
+function P.constructor(ai,aj,ak)
+ah.constructor(ai,aj)
+ai.name=ak
+ai.label=Drawing.new"Text"
+ai.circle=Drawing.new"Circle"
+ai.outline=Drawing.new"Circle"
+ai._maid:add(ai.label,"Remove")
+ai._maid:add(ai.circle,"Remove")
+ai._maid:add(ai.outline,"Remove")
+ai._maid:add(aj.AncestryChanged:Connect(function(al,am)
+if am==nil then
+ai:destroy()
+end
+end))
+end
+
+
+function P.onStart(ai)
+P.attached[ai.instance]=ai
+ah.onStart(ai)
+
+local aj,ak,al=ai.label,ai.circle,ai.outline
+aj.Text=ai.name
+aj.Size=18
+aj.Center=true
+aj.Outline=true
+aj.Visible=false
+
+ak.Thickness=1
+ak.NumSides=6
+ak.Radius=5
+ak.Filled=true
+ak.Visible=false
+
+al.Color=Color3.new()
+al.Thickness=1.5
+al.NumSides=6
+al.Radius=5
+al.Filled=false
+al.Visible=false
+al.ZIndex=2
+end
+
+function P.onRender(ai,aj)
+local ak,al,am=ai.label,ai.circle,ai.outline
+if ai:isVisualEnabled()then
+local an=ae(w,ai.instance.Position)
+local ao=an.Z>0
+if ao then
+local ap=af(an.X,an.Y)
+ak.Position=ap+ag
+al.Position=ap
+am.Position=ap
+
+local aq=ai:getColor()
+ak.Color=aq
+al.Color=aq
+end
+ak.Visible=ao
+al.Visible=ao
+am.Visible=ao
+else
+ak.Visible=false
+al.Visible=false
+am.Visible=false
+end
+end
+
+
+function P.isVisualEnabled(ai)
+return Toggles["esp.interactable.enabled"].Value
+end
+
+function P.getColor(ai)
+return Options["esp.interactable.color"].Value
+end
+
+function P.destroy(ai)
+P.attached[ai.instance]=nil
+ah.destroy(ai)
+end
+end
+
+
+
+do
+local ae=P
+Q=setmetatable({},{__index=ae})
+Q.__index=Q
+
+function Q.__tostring(af)
+return"ObtainableComponent - "..af.instance:GetFullName()
+end
+Q.attached={}
+
+
+function Q.new(af,ag,...)
+local ah=setmetatable({},Q)
+ah=ah:constructor(af,ag,...)or ah
+ah:run()
+return ah
+end
+
+
+function Q.constructor(af,ag,ah)
+ae.constructor(af,ag,ah)
+end
+
+
+function Q.onStart(af)
+Q.attached[af.instance]=af
+ae.onStart(af)
+local ag,ah,ai=af.label,af.circle,af.outline
+ah.NumSides=5
+ai.NumSides=5
+end
+
+
+function Q.isVisualEnabled(af)
+return Toggles["esp.obtainable.enabled"].Value
+end
+
+function Q.getColor(af)
+return Options["esp.obtainable.color"].Value
+end
+
+function Q.destroy(af)
+Q.attached[af.instance]=nil
+ae.destroy(af)
+end
+end
+
+
+
+do
+local ae=Q
+R=setmetatable({},{__index=ae})
+R.__index=R
+
+function R.__tostring(af)
+return"GoldComponent - "..af.instance:GetFullName()
+end
+
+
+function R.new(af,...)
+local ag=setmetatable({},R)
+ag=ag:constructor(af,...)or ag
+ag:run()
+return ag
+end
+
+
+function R.constructor(af,ag)
+ae.constructor(af,ag,"Gold")
+af.denomination=0
+end
+
+
+function R.onStart(af)
+ae.onStart(af)
+af:onDenominationChanged()
+af.instance:GetAttributeChangedSignal"GoldValue":Connect(function()
+af:onDenominationChanged()
+end)
+end
+
+function R.onRender(af,ag)
+af.label.Text=Options["esp.gold.format"].Value:gsub("{amount}",tostring(af.denomination))
+ae.onRender(af,ag)
+end
+
+function R.onDenominationChanged(af)
+af.denomination=af.instance.Parent:GetAttribute"GoldValue"or 0
+end
+
+
+function R.isVisualEnabled(af)
+return Toggles["esp.gold.enabled"].Value and af.denomination>=Options["esp.gold.minimum"].Value
+end
+
+function R.getColor(af)
+return Options["esp.gold.color"].Value
+end
+end
+
+
+
+do local ae=function()
+
+
+return Toggles["auto-loot.enabled"].Value and Options["auto-loot.keybind"]:GetState()end
+
+
+local af=t
+S=setmetatable({},{__index=af})
+S.__index=S
+
+function S.__tostring(ag)
+return"RoomComponent - "..ag.instance:GetFullName()
+end
+S.attached={}
+
+
+function S.new(ag,...)
+local ah=setmetatable({},S)
+ah=ah:constructor(ag,...)or ah
+ah:run()
+return ah
+end
+
+
+function S.constructor(ag,ah)
+af.constructor(ag,ah)
+ag.id=tonumber(ah.Name)
+ag.assets=ah:WaitForChild("Assets",5)
+end
+
+
+function S.onStart(ag)
+S.attached[ag.instance]=ag
+af.onStart(ag)
+
+
+if ag.id==50 or ag.id==100 then
+task.defer(ag.onFigure,ag)
+end
+local ah=ag.instance:WaitForChild("RoomExit",5)
+if ah then
+N.new(ah,ag.id)
+end
+
+
+ag._maid:add(ag.instance.DescendantAdded:Connect(function(ai)
+ag:onDescendant(ai)
+end))
+for ai,aj in ipairs(ag.instance:GetDescendants())do
+task.spawn(ag.onDescendant,ag,aj)
+end
+end
+
+function S.onDescendant(ag,ah)
+local ai=ah.Parent
+local aj=ai.Name
+local ak=ah.Name
+if ak=="Main"then
+if aj=="LeverForGate"then
+P.new(ah,"Lever")
+elseif aj=="Lighter"then
+Q.new(ah,"Lighter")
+elseif aj=="Vitamins"then
+Q.new(ah,"Vitamins")
+elseif aj=="Lockpick"then
+Q.new(ah,"Lockpicks")
+elseif aj=="Bandage"then
+Q.new(ah,"Bandages")
+elseif aj=="Battery"then
+Q.new(ah,"Batteries")
+elseif aj=="CrucifixWall"then
+Q.new(ah,"Crucifix")
+elseif aj=="ChestBox"then
+P.new(ah,"Chest")
+elseif aj=="ChestBoxLocked"then
+P.new(ah,"Chest [Locked]")
+end
+elseif ak=="Handle"then
+if aj=="Candle"then
+Q.new(ah,"Candle")
+end
+elseif ak=="Base"then
+if aj=="LiveHintBook"then
+Q.new(ah,"Book")
+elseif aj=="LiveBreakerPolePickup"then
+Q.new(ah,"Fuse")
+elseif aj=="Snare"then
+M.new(ai)
+end
+elseif ak=="Lock"then
+if aj=="Door"then
+P.new(ah,"Lock")
+end
+elseif aj=="KeyObtain"then
+if ak=="Hitbox"then
+Q.new(ah,"Key")
+end
+elseif ak=="Wardrobe"then
+O.new(ah,ag.id)
+elseif ak=="Toolshed"then
+O.new(ah,ag.id)
+elseif ak=="Hitbox"then
+if aj=="GoldPile"then
+R.new(ah)
+end
+end
+
+
+if ag.id~=52 and ah:IsA"ProximityPrompt"then
+local al=s.new()
+ag._maid:add(al)
+
+local am
+local an=ah
+local ao=os.clock()
+local ap=an.MaxActivationDistance+5
+
+
+if m[aj]then
+am=aj=="Knobs"and ai or ai:WaitForChild("Main",5)
+end
+
+
+if aj=="GoldPile"or aj=="KeyObtain"then
+am=ai:WaitForChild("Hitbox",5)
+end
+
+
+if n[aj]then
+am=ai:WaitForChild("Main",5)
+elseif aj=="PickupItem"then
+am=ai:WaitForChild("Handle",5)
+end
+
+
+if aj=="LiveHintBook"or aj=="LiveBreakerPolePickup"then
+am=ai:WaitForChild("Base",5)
+end
+
+
+if am then
+al:add(c.Heartbeat:Connect(function()
+if not an:IsDescendantOf(ag.instance)then
+return al:destroy()
+end
+local aq=an:GetAttribute"Interactions"
+if aq then
+return al:destroy()
+end
+if not ae()then
+return
+end
+local ar=os.clock()
+if ar-ao<l then
+return
+end
+
+local X=G.attached
+local Y=(am.Position-X.root.Position).Magnitude
+if Y<=ap then
+fireproximityprompt(an)
+ao=ar
+end
+end))
+end
+
+return
+end
+end
+
+function S.onFigure(ag)
+local ah=ag.instance:WaitForChild("FigureSetup",5)
+L.new(ah)
+end
+
+
+function S.destroy(ag)
+S.attached[ag.instance]=nil
+af.destroy(ag)
+end
+
+
+local ag=function(ag)
+S.new(ag)
+end
+D:add(e.CurrentRooms.ChildAdded:Connect(ag))
+for ah,ai in ipairs(e.CurrentRooms:GetChildren())do
+task.defer(ag,ai)
+end
+end
+
+
+
+
+
+
+
+p:SetWatermark"Linoria Community (TerminalVibes)"
+p:Notify"Loading UI..."
+
+do
+local ae=p:CreateWindow(g.." ("..h..")")
+
+do
+local af=ae:AddTab"Gameplay"
+
+do
+local ag=af:AddLeftGroupbox"Character Mods"
+ag:AddToggle(
+"character.sprint.enabled",
+{Text="Sprint Enabled",Default=false,Tooltip="Enables Sprinting by pressing the Keybind"}
+):AddKeyPicker("character.sprint.keybind",{Text="Sprint",Default="LeftShift"})
+ag:AddSlider(
+"character.sprint.speed",
+{Text="Sprint Boost (in seconds)",Min=0,Max=7.5,Default=0,Rounding=1,Suffix=" studs"}
+)
+ag:AddToggle(
+"character.glow.enabled",
+{Text="Body Glow",Default=false,Tooltip="Adds a subtle glow for better vision"}
+)
+ag:AddSlider(
+"character.glow.brightness",
+{Text="Glow Brightness",Min=0,Max=100,Default=0,Rounding=0,Suffix=""}
+)
+end
+
+do
+local ag=af:AddLeftGroupbox"Gameplay Mods"
+ag:AddToggle("gameplay.heartbeat.enabled",{
+Text="Automated Heartbeat",
+Default=false,
+Tooltip="Automatically does Heartbeat inputs for you. (Room 50 & 100)",
+})
+ag:AddToggle("gameplay.parser.enabled",{
+Text="Library Code",
+Default=false,
+Tooltip="Automatically parses the Library padlock code as you obtain clues. (Paper & Hints required)",
+}):AddKeyPicker("gameplay.parser.keybind",{
+Default="P",
+NoUI=true,
+Mode="Toggle",
+})
+ag:AddToggle("gameplay.breaker.enabled",{
+Text="Breaker Code",
+Default=false,
+Tooltip="Notifies you of Electrical Breaker code when it generates.",
+}):AddKeyPicker("gameplay.breaker.keybind",{
+Default="B",
+NoUI=true,
+Mode="Toggle",
+})
+end
+
+do
+local ag=af:AddRightTabbox"Alerts"
+
+local ah=ag:AddTab"Alerts"
+ah:AddToggle(
+"alerts.enabled",
+{Text="Alerts Enabled",Default=true,Tooltip="Master toggle for all script alerts."}
+)
+ah:AddToggle("alerts.drawing",{
+Text="Use Drawing API",
+Default=true,
+Tooltip="Enables the drawing API for script alerts.",
+})
+ah:AddToggle("alerts.audio",{
+Text="Enable Sound",
+Default=true,
+Tooltip="Plays a sound when an important alert is triggered.",
+})
+
+local ai=ag:AddTab"Advanced"
+ai:AddToggle(
+"alerts.debug",
+{Text="Debug Alerts",Default=true,Tooltip="Enabled alerts related to script status."}
+)
+ai:AddToggle(
+"alerts.entity",
+{Text="Entity Alerts",Default=true,Tooltip="Enabled alerts about entities spawning."}
+)
+end
+end
+
+do
+local af=ae:AddTab"Blatant"
+
+do
+local ag=af:AddLeftGroupbox"Auto Loot"
+ag:AddToggle("auto-loot.enabled",{
+Text="Enabled",
+Default=false,
+Tooltip="Automatically loots items for you.",
+}):AddKeyPicker("auto-loot.keybind",{
+Text="Auto-loot",
+Default="F",
+})
+ag:AddDropdown("auto-loot.filter",{
+Text="Loot Filter (Work In Progress)",
+Tooltip="Selected items will be ignored by the auto-loot.",
+
+Values={""},
+Default=1,
+Multi=true,
+})
+end
+
+do
+local ag=af:AddLeftGroupbox"Entity Hooks"
+ag:AddToggle("blatant.timothy.remove",{
+Text="Remove Timothy",
+Default=false,
+Tooltip="Timothy will no longer jumpscare you (You will still take damage).",
+})
+ag:AddToggle("blatant.screech.remove",{
+Text="Remove Screech",
+Default=false,
+Tooltip="Screech will no longer spawn for you.",
+})
+end
+end
+
+do
+local af=ae:AddTab"Visuals"
+
+do
+local ag=af:AddLeftTabbox"ESP"
+
+local ah=ag:AddTab"Entity ESP"
+do
+ah:AddToggle(
+"esp.player.enabled",
+{Text="Player ESP",Default=true,Tooltip="ESP for other players"}
+):AddColorPicker("esp.player.color",{
+Title="Player ESP Color",
+Default=Color3.new(1,1,1),
+})
+ah:AddToggle(
+"esp.screech.enabled",
+{Text="Screech ESP",Default=true,Tooltip="Tracer ESP for Screech entities"}
+):AddColorPicker("esp.screech.color",{
+Title="Screech ESP Color",
+Default=Color3.new(1,0,0),
+})
+ah:AddToggle(
+"esp.rush.enabled",
+{Text="Rush/Ambush ESP",Default=true,Tooltip="ESP for both Rush and Ambush entities"}
+)
+:AddColorPicker("esp.rush.rush-color",{
+Title="Rush ESP Color",
+Default=Color3.new(1,0,0),
+})
+:AddColorPicker("esp.rush.ambush-color",{
+Title="Ambush ESP Color",
+Default=Color3.new(0,1,0),
+})
+ah:AddToggle(
+"esp.figure.enabled",
+{Text="Figure ESP",Default=true,Tooltip="ESP for the Figure entity"}
+):AddColorPicker("esp.figure.color",{
+Title="Figure ESP Color",
+Default=Color3.new(0.75,0.25,0.25),
+})
+ah
+:AddToggle(
+"esp.snare.enabled",
+{Text="Snare ESP",Default=true,Tooltip="ESP for snare traps"}
+)
+:AddColorPicker("esp.snare.color",{
+Title="Snare ESP Color",
+Default=Color3.new(1,0,0),
+})
+end
+
+local ai=ag:AddTab"Object ESP"
+do
+ai:AddToggle("esp.door.enabled",{Text="Door ESP",Default=false,Tooltip="ESP for doors"})
+:AddColorPicker("esp.door.default-color",{
+Title="Other Doors ESP Color",
+Default=Color3.new(0,0.3,0.75),
+})
+:AddColorPicker("esp.door.target-color",{
+Title="Current Door ESP Color",
+Default=Color3.new(0,1,0),
+})
+ai:AddToggle(
+"esp.wardrobe.enabled",
+{Text="Wardrobe ESP",Default=false,Tooltip="ESP for Wardrobe"}
+):AddColorPicker("esp.wardrobe.color",{
+Title="Wardrobe ESP Color",
+Default=Color3.new(0,1,0.9),
+})
+ai:AddToggle(
+"esp.interactable.enabled",
+{Text="Interactable ESP",Default=true,Tooltip="ESP for interactable items"}
+):AddColorPicker("esp.interactable.color",{
+Title="Interactable ESP Color",
+Default=Color3.new(1,1,1),
+})
+ai:AddToggle(
+"esp.obtainable.enabled",
+{Text="Obtainable ESP",Default=true,Tooltip="ESP for items that can be picked up"}
+):AddColorPicker("esp.obtainable.color",{
+Title="Obtainable ESP Color",
+Default=Color3.new(1,1,0),
+})
+end
+end
+
+do
+local ag=af:AddLeftGroupbox"Gold ESP"
+ag:AddToggle(
+"esp.gold.enabled",
+{Text="Gold ESP",Default=true,Tooltip="ESP for items that can be picked up"}
+):AddColorPicker("esp.gold.color",{
+Title="Gold ESP Color",
+Default=Color3.new(1,1,0),
+})
+ag:AddInput("esp.gold.format",{
+Text="Custom Label",
+Default="Gold [{amount}]",
+Placeholder="Label Text",
+Tooltip="Custom text to display for gold. {amount} will be replaced with the amount of gold.",
+})
+ag:AddSlider("esp.gold.minimum",{
+Text="Minimum Gold",
+Default=10,
+Min=0,
+Max=100,
+Rounding=0,
+Tooltip="Minimum amount of gold to display",
+})
+end
+end
+
+do
+local af=ae:AddTab"Credits"
+
+local ag=af:AddLeftGroupbox"Credits"
+ag:AddLabel"TerminalVibes - Creator"
+ag:AddLabel"Inori @v3rm - UI Library"
+ag:AddDivider()
+ag:AddLabel"Contributors:"
+ag:AddLabel"> IAmAGoodScammer @v3rm"
+ag:AddLabel"> brickmane @v3rm"
+ag:AddLabel"> yuuiz#1336 @Discord"
+ag:AddDivider()
+ag:AddLabel"Donators:"
+ag:AddLabel"> reversing#2937 @Discord"
+
+local ah=af:AddRightGroupbox"Socials"
+ah:AddButton{
+Text="Discord Server",
+Func=function()
+setclipboard"https://discord.gg/8PATx7UKXZ"
+end,
+}
+end
+
+do
+local af=ae:AddTab"Settings"
+
+r:SetLibrary(p)
+q:SetLibrary(p)
+
+r:SetFolder(i)
+q:SetFolder(i.."/"..j)
+
+q:IgnoreThemeSettings()
+q:SetIgnoreIndexes{"MenuKeybind"}
+
+q:BuildConfigSection(af)
+r:ApplyToTab(af)
+
+local ag=af:AddLeftGroupbox"Menu"
+ag:AddButton("Unload",function()
+p:Unload()
+end)
+ag:AddLabel"Menu bind":AddKeyPicker("MenuKeybind",{Default="End",NoUI=true,Text="Menu keybind"})
+
+ag:AddToggle("Keybinds",{Text="Show Keybinds Menu",Default=true}):OnChanged(function()
+p.KeybindFrame.Visible=Toggles.Keybinds.Value
+end)
+ag:AddToggle("Watermark",{Text="Show Watermark",Default=true}):OnChanged(function()
+p:SetWatermarkVisibility(Toggles.Watermark.Value)
+end)
+end
+end
+
+p:Notify"UI Built! [Right Ctrl or Right Shift]"
+q:LoadAutoloadConfig()
+
+
+
+
+
+
+
+
+
+
+local ae=function()
+w=e.CurrentCamera or w
+end
+D:add(e:GetPropertyChangedSignal"CurrentCamera":Connect(ae))
+
+local af=function(af)
+if af.Name=="Screech"then
+J.new(af)
+end
+end
+D:add(w.ChildAdded:Connect(af))
+
+local ag=function(ag)
+local ah=ag.Name
+if ah=="RushMoving"or ag.Name=="AmbushMoving"then
+K.new(ag)
+elseif ah=="Eyes"then
+ab(Toggles["alerts.entity"].Value,{
+message="Eyes spawned, look away from it!",
+audio=true,
+duration=5,
+})
+end
+end
+D:add(e.ChildAdded:Connect(ag))
+
+
+
+local ah=function()
+if Toggles["blatant.screech.remove"].Value then
+ab(Toggles["alerts.debug"],{
+message="Screech was eaten by TerminalVibes",
+duration=4,
+})
+task.wait(1)
+return y.Screech:FireServer(true)
+end
+
+ab(Toggles["alerts.entity"].Value,{
+message="Screech spawned, turn around and look at it!",
+audio=true,
+duration=5,
+})
+end
+D:add(y.Screech.OnClientEvent:Connect(ah))
+
+local ai=function(ai,aj)
+if ai and aj then
+A[ai]=tostring(aj)
+end
+end
+D:add(y.PadlockHint.OnClientEvent:Connect(ai))
+
+local aj=function(...)
+E:destroy()
+if not Toggles["gameplay.heartbeat.enabled"].Value then
+return
+end
+
+local aj=v:WaitForChild("MainUI",1):WaitForChild("MainFrame",1):WaitForChild("Heartbeat",1)
+local ak=aj:WaitForChild("Heart",1)
+assert(aj and ak,"Heartbeat frame not found")
+
+
+local al=ak.AbsolutePosition.X
+E:add(ak.ChildAdded:Connect(function(am)
+if am.Name=="LiveHalf"then
+local an=am.Image=="rbxassetid://8428304451"
+local ao=math.random(10,25)
+
+local ap=0
+repeat
+c.RenderStepped:Wait()
+ap=math.abs(am.AbsolutePosition.X-al)
+until ap<=ao
+
+local aq=an and Enum.KeyCode.Q or Enum.KeyCode.E
+f:SendKeyEvent(true,aq,false,game)
+task.wait()
+f:SendKeyEvent(false,aq,false,game)
+ab(Toggles["alerts.debug"].Value,{
+message="Simulated Heartbeat input: "..aq.Name,
+duration=2.5,
+})
+end
+end))
+E:add(aj:GetPropertyChangedSignal"Visible":Connect(function()
+if not aj.Visible then
+E:destroy()
+end
+end))
+end
+D:add(y.ClutchHeartbeat.OnClientEvent:Connect(aj))
+
+
+
+local ak=function(ak)
+for al,am in ipairs(T)do
+for an,ao in pairs(am.attached)do
+ao:onTick(ak)
+end
+end
+end
+local al=function(al)
+for am,an in ipairs(U)do
+for ao,ap in pairs(an.attached)do
+ap:onRender(al)
+end
+end
+end
+local am=function(am,an)
+for ao,ap in ipairs(V)do
+for aq,ar in pairs(ap.attached)do
+ar:onPhysics(am,an)
+end
+end
+local aq=G.attached
+if aq then
+aq:onPhysics(am,an)
+end
+end
+
+D:add(c.Heartbeat:Connect(ak))
+D:add(c.RenderStepped:Connect(al))
+D:add(c.Stepped:Connect(am))
+
+
+
+Options["gameplay.parser.keybind"]:OnClick(function()
+if x.LatestRoom.Value==50 then
+local an=""
+for ao =1,5 do
+local ap=A[B[ao] ]
+an=an..(ap~=nil and ap or"_")
+end
+ab(Toggles["gameplay.parser.enabled"].Value,{
+message="[Code Parser]: "..an,
+audio=false,
+duration=7.5,
+})
+end
+end)
+
+Options["gameplay.breaker.keybind"]:OnClick(function()
+local an=""
+for ao =1,#C do
+local ap,aq=unpack(C[ao])
+if aq then
+an=an..tostring(ap).." "
+end
+end
+ab(Toggles["gameplay.breaker.enabled"].Value,{
+message="[Breaker Code]: "..an,
+audio=false,
+duration=7.5,
+})
+end)
+
+Toggles["blatant.screech.remove"]:OnChanged(function()
+ac(Toggles["blatant.screech.remove"].Value)
+end)
+
+Toggles["blatant.timothy.remove"]:OnChanged(function()
+ad(Toggles["blatant.timothy.remove"].Value)
+end)
+
+p:OnUnload(function()
+D:destroy()
+getgenv()[j..h]=nil
+local an={
+H,
+I,
+J,
+K,
+L,
+M,
+N,
+O,
+P,
+Q,
+S,
+}
+for ao,ap in ipairs(an)do
+for aq,ar in pairs(ap.attached)do
+ar:destroy()
+end
+end
+if G.attached then
+G.attached:destroy()
+end
+end)
+
+
+
+
+
+
+
+task.defer(function()
+local an
+repeat
+task.wait(0.5)
+for ao,ap in pairs(getconnections(y.EngageMinigame.OnClientEvent))do
+local aq=ap.Function
+if aq then
+local ar=getfenv(aq).script
+if ar.Name=="MinigameHandler"then
+local X=debug.getupvalue(aq,1)
+if type(X)=="function"then
+an=X
+end
+end
+end
+if ao%2000==0 then
+task.wait()
+end
+end
+until an~=nil
+
+local ao
+repeat
+task.wait()
+ao=debug.getupvalue(an,7)
+until ao~=nil
+
+local ap=(syn and syn.set_thread_identity)or setidentity
+debug.setupvalue(an,7,function(aq,...)
+local ar=ao(aq,...)
+C=aq
+task.delay(0.1,function()
+ap(7)
+local X=""
+for Y =1,#C do
+local Z,_=unpack(C[Y])
+ab(true,{
+message=tostring(Z).." = "..tostring(_),
+})
+if _ then
+X=X..tostring(Z).." "
+end
+end
+ab(Toggles["gameplay.breaker.enabled"].Value,{
+message="[Breaker Code]: "..X,
+audio=false,
+duration=7.5,
+})
+ap(2)
+end)
+return ar
+end)
+
+D:add(function()
+debug.setupvalue(an,7,ao)
+end)
+end)
+
+
+
+
+
+
+
+table.insert(U,H)
+table.insert(U,J)
+table.insert(U,K)
+table.insert(U,L)
+table.insert(U,M)
+table.insert(U,N)
+table.insert(U,O)
+table.insert(U,P)
+
+z.Name="Main"
+z.SoundId="rbxassetid://6026984224"
+z.Volume=6
+z.Parent=d
+
+task.delay(10,function()
+ac(Toggles["blatant.screech.remove"].Value)
+ad(Toggles["blatant.timothy.remove"].Value)
+end)
+
+do
+local an=game.PlaceId
+local ao=game.PlaceVersion
+local ap=k[an]
+if ao>ap then
+p:Notify"Game has been updated! Please be careful when using this script."
+p:Notify"The place ID and Version has been copied to your clipboard."
+setclipboard("["..tostring(an).."] = "..tostring(ao)..",")
+end
+end
+
+return p:Notify("["..g.."] Loaded! ("..h..")")
