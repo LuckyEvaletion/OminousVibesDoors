@@ -1,10 +1,12 @@
 local a=game:GetService"ContextActionService"
-local b=game:GetService"Players"
-local c=game:GetService"ReplicatedStorage"
-local d=game:GetService"RunService"
-local e=game:GetService"SoundService"
-local f=game:GetService"Workspace"
-local g=game:GetService"VirtualInputManager"
+local b=game:GetService"Lighting"
+local c=game:GetService"PathfindingService"
+local d=game:GetService"Players"
+local e=game:GetService"ReplicatedStorage"
+local f=game:GetService"RunService"
+local g=game:GetService"SoundService"
+local h=game:GetService"Workspace"
+local i=game:GetService"VirtualInputManager"
 
 
 
@@ -12,15 +14,12 @@ local g=game:GetService"VirtualInputManager"
 
 
 
-local h="Doors"
-local i="Rooms v5.3"
-local j="TerminalVibes/doors"
-local k="rooms"
+local j="Doors"
+local k="Rooms v5.4"
+local l="TerminalVibes/doors"
+local m="rooms"
 
-local l={[6839171747]=5924}
-
-
-local m=0.1
+local n={[6839171747]=5938}
 
 
 
@@ -29,21 +28,21 @@ local m=0.1
 
 
 do
-local n=game.PlaceId
-local o=game.PlaceVersion
-local p=l[n]
-if not p then
+local o=game.PlaceId
+local p=game.PlaceVersion
+local q=n[o]
+if not q then
 warn"Script does not support this place instance."
 warn"The PlaceID and version has been set to your clipboard. Please report this to the developer."
-return setclipboard("["..tostring(n).."] = "..tostring(o)..",")
+return setclipboard("["..tostring(o).."] = "..tostring(p)..",")
 end
 end
 do
-local n=k..i
-if getgenv()[n]then
+local o=m..k
+if getgenv()[o]then
 return
 end
-getgenv()[n]=true
+getgenv()[o]=true
 end
 
 
@@ -52,13 +51,11 @@ end
 
 
 
-local n="https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/"
+local o="https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/"
 
-local o=loadstring(game:HttpGet(n.."Library.lua"))()
-local p=loadstring(game:HttpGet(n.."addons/SaveManager.lua"))()
-local q=loadstring(game:HttpGet(n.."addons/ThemeManager.lua"))()
-
-
+local p=loadstring(game:HttpGet(o.."Library.lua"))()
+local q=loadstring(game:HttpGet(o.."addons/SaveManager.lua"))()
+local r=loadstring(game:HttpGet(o.."addons/ThemeManager.lua"))()
 
 
 
@@ -85,113 +82,115 @@ local q=loadstring(game:HttpGet(n.."addons/ThemeManager.lua"))()
 
 
 
-
-local r
-do
-local s,t=type,typeof
-r=setmetatable({},{
-__tostring=function()
-return"Bin"
-end,
-})
-r.__index=r
-function r.new(...)
-local u=setmetatable({},r)
-return u:constructor(...)or u
-end
-function r.constructor(u)end
-function r.add(u,v,w)
-local x={
-item=v,
-method=w,
-}
-if u.head==nil then
-u.head=x
-end
-if u.tail then
-u.tail.next=x
-end
-u.tail=x
-return v
-end
-function r.destroy(u)
-while u.head do
-local v=u.head.item
-local w=u.head.method
-if w then
-v[w](v)
-elseif s(v)=="function"then
-v()
-elseif t(v)=="RBXScriptConnection"then
-v:Disconnect()
-elseif s(v)=="thread"then
-task.cancel(v)
-elseif v.destroy~=nil then
-v:destroy()
-elseif v.Destroy~=nil then
-v:Destroy()
-end
-u.head=u.head.next
-end
-end
-function r.isEmpty(u)
-return u.head==nil
-end
-end
 
 
 
 local s
 do
-s={}
+local t,u=type,typeof
+s=setmetatable({},{
+__tostring=function()
+return"Bin"
+end,
+})
 s.__index=s
-function s.__tostring(t)
-return"BaseComponent - "..t.instance:GetFullName()
+function s.new(...)
+local v=setmetatable({},s)
+return v:constructor(...)or v
 end
-
-
-local t,u,v=setmetatable,assert,task.defer
-
-
-function s.new(w,...)
-local x=t({},s)
-x=x:constructor(w,...)or x
-x:run()
-return x
+function s.constructor(v)end
+function s.add(v,w,x)
+local y={
+item=w,
+method=x,
+}
+if v.head==nil then
+v.head=y
 end
-
-
-function s.constructor(w,x,...)
-w.instance=x
-w.running=false
-w.destructed=false
-w._maid=r.new()
-w._maid:add(x.Destroying:Connect(function()
-if not w.destructed then
+if v.tail then
+v.tail.next=y
+end
+v.tail=y
+return w
+end
+function s.destroy(v)
+while v.head do
+local w=v.head.item
+local x=v.head.method
+if x then
+w[x](w)
+elseif t(w)=="function"then
+w()
+elseif u(w)=="RBXScriptConnection"then
+w:Disconnect()
+elseif t(w)=="thread"then
+task.cancel(w)
+elseif w.destroy~=nil then
 w:destroy()
+elseif w.Destroy~=nil then
+w:Destroy()
+end
+v.head=v.head.next
+end
+end
+function s.isEmpty(v)
+return v.head==nil
+end
+end
+
+
+
+local t
+do
+t={}
+t.__index=t
+function t.__tostring(u)
+return"BaseComponent - "..u.instance:GetFullName()
+end
+
+
+local u,v,w=setmetatable,assert,task.defer
+
+
+function t.new(x,...)
+local y=u({},t)
+y=y:constructor(x,...)or y
+y:run()
+return y
+end
+
+
+function t.constructor(x,y,...)
+x.instance=y
+x.running=false
+x.destructed=false
+x._maid=s.new()
+x._maid:add(y.Destroying:Connect(function()
+if not x.destructed then
+x:destroy()
 end
 end))
 end
 
 
-function s.onStart(w)end
+function t.onStart(x)end
 
 
-function s.run(w)
-u(not w.running,"["..w:__tostring().."] is already running")
-v(function()
-w.running=true
-if not w.destructed then
-w:onStart()
+function t.run(x)
+v(not x.running,"["..x:__tostring().."] is already running")
+w(function()
+x.running=true
+if not x.destructed then
+x:onStart()
 end
 end)
 end
 
-function s.destroy(w)
-u(not w.destructed,"["..w:__tostring().."] is already destroyed")
-w.running=false
-w.destructed=true
-w._maid:destroy()
+function t.destroy(x)
+v(not x.destructed,"["..x:__tostring().."] is already destroyed")
+x.running=false
+x.destructed=true
+x._maid:destroy()
 end
 end
 
@@ -279,32 +278,43 @@ end
 
 
 
-local t=b.LocalPlayer
-local u=f.CurrentCamera
-
-local v=c:WaitForChild"GameData"
 
 
 
-local w={}
+
+
+
+
+
+
+
+
+
+local u=d.LocalPlayer
+local v=h.CurrentCamera
+
+local w=e:WaitForChild"GameData"
+
+
+
+local x={}
 
 
 do
-local x=c:WaitForChild"EntityInfo"
-local y={
-A90=x:WaitForChild"A90",
+local y=e:WaitForChild"EntityInfo"
+local z={
+A90=y:WaitForChild"A90",
 }
-for z,A in pairs(y)do
-w[z]=A
+for A,B in pairs(z)do
+x[A]=B
 end
 end
 
-local x=Instance.new"Sound"
+local y=Instance.new"Sound"
 
-local y=r.new()
+local z=s.new()
 
 
-local z
 local A
 local B
 local C
@@ -316,10 +326,11 @@ local H
 local I
 local J
 local K
+local L
 
-local L={}
 local M={}
 local N={}
+local O={}
 
 
 
@@ -327,73 +338,73 @@ local N={}
 
 
 
-local O={}local aa=function(
-P, Q)
-local R=0.12
+local P={}local aa=function(
+Q, R)
+local S=0.12
 
-local S=r.new()
-local T=Drawing.new"Text"
-local U=Drawing.new"Square"
+local T=s.new()
+local U=Drawing.new"Text"
 local V=Drawing.new"Square"
-S:add(T,"Remove")
-S:add(U,"Remove")
-S:add(V,"Remove")
+local W=Drawing.new"Square"
+T:add(U,"Remove")
+T:add(V,"Remove")
+T:add(W,"Remove")
 
-T.Text=P or""
-T.Color=Color3.fromRGB(255,255,255)
-T.ZIndex=3
+U.Text=Q or""
+U.Color=Color3.fromRGB(255,255,255)
+U.ZIndex=3
 
-U.Color=Color3.fromRGB(25,25,25)
-U.Filled=true
-U.Thickness=0
-U.Size=T.TextBounds+Vector2.new(10,8)
-U.ZIndex=2
-
-V.Color=Color3.fromRGB(0,100,255)
+V.Color=Color3.fromRGB(25,25,25)
 V.Filled=true
 V.Thickness=0
-V.Size=Vector2.new(2,24)
-V.ZIndex=1
+V.Size=U.TextBounds+Vector2.new(10,8)
+V.ZIndex=2
 
-local W=0
-for X in pairs(O)do
-W=math.max(W,X+1)
+W.Color=Color3.fromRGB(0,100,255)
+W.Filled=true
+W.Thickness=0
+W.Size=Vector2.new(2,24)
+W.ZIndex=1
+
+local X=0
+for Y in pairs(P)do
+X=math.max(X,Y+1)
 end
-O[W]=S
+P[X]=T
 
-local Y=0
-local Z,_,aa=pairs(O)
-S:add(d.RenderStepped:Connect(function(ab)
-Y+=ab
+local Z=0
+local _,aa,ab=pairs(P)
+T:add(f.RenderStepped:Connect(function(ac)
+Z+=ac
 
-local ac,ad=Z(_,aa)
-local ae=ac or 0
-while ac~=nil do
-ae=math.min(ae,ac)
-ac,ad=Z(_,ac)
-end
-
-local af=W-ae
-local ag=5
-if Y<=R then
-ag=-(U.Size.X+2)+(Y/R)*(U.Size.X+7)
-elseif Y>=Q-R then
-ag=5-(Y-(Q-R))/R*(U.Size.X+7)
+local ad,ae=_(aa,ab)
+local af=ad or 0
+while ad~=nil do
+af=math.min(af,ad)
+ad,ae=_(aa,ad)
 end
 
-local ah=Vector2.new(ag,40+(af*25))
-T.Position=ah+Vector2.new(7,4)
-U.Position=ah+Vector2.new(2,0)
-V.Position=ah
+local ag=X-af
+local ah=5
+if Z<=S then
+ah=-(V.Size.X+2)+(Z/S)*(V.Size.X+7)
+elseif Z>=R-S then
+ah=5-(Z-(R-S))/S*(V.Size.X+7)
+end
+
+local ai=Vector2.new(ah,40+(ag*25))
+U.Position=ai+Vector2.new(7,4)
+V.Position=ai+Vector2.new(2,0)
+W.Position=ai
 end))
-S:add(d.RenderStepped:Once(function(ab)
-T.Visible=true
+T:add(f.RenderStepped:Once(function(ac)
 U.Visible=true
 V.Visible=true
+W.Visible=true
 end))
-task.delay(Q,function()
-S:destroy()
-O[W]=nil
+task.delay(R,function()
+T:destroy()
+P[X]=nil
 end)end local ab=function(
 
 
@@ -408,11 +419,11 @@ duration=ac.duration or 5,
 if Toggles["alerts.drawing"].Value then
 aa(ad.message,ad.duration)
 else
-o:Notify(ad.message,ad.duration)
+p:Notify(ad.message,ad.duration)
 end
-if ad.audio and Toggles["alerts.audio"].Value then
-x.TimePosition=0.25
-x:Play()
+if ad.audio and Toggles["alerts.audio.enabled"].Value then
+y.TimePosition=0.25
+y:Play()
 end
 end end
 
@@ -426,27 +437,27 @@ end end
 
 
 do
-local ac=s
-z=setmetatable({},{__index=ac})
-z.__index=z
+local ac=t
+A=setmetatable({},{__index=ac})
+A.__index=A
 
-function z.__tostring(ad)
+function A.__tostring(ad)
 return"CharacterComponent - "..ad.instance:GetFullName()
 end
-z.attached={}
+A.attached={}
 
 
-function z.new(ad,...)
-local ae=setmetatable({},z)
+function A.new(ad,...)
+local ae=setmetatable({},A)
 ae=ae:constructor(ad,...)or ae
 ae:run()
 return ae
 end
 
 
-function z.constructor(ad,ae)
+function A.constructor(ad,ae)
 ac.constructor(ad,ae)
-ad.client=C.attached[b:GetPlayerFromCharacter(ae)]
+ad.client=D.attached[d:GetPlayerFromCharacter(ae)]
 ad.root=ae:WaitForChild("HumanoidRootPart",5)
 ad.humanoid=ae:WaitForChild("Humanoid",5)
 
@@ -462,14 +473,14 @@ end))
 end
 
 
-function z.onStart(ad)
-z.attached[ad.instance]=ad
+function A.onStart(ad)
+A.attached[ad.instance]=ad
 ac.onStart(ad)
 end
 
 
-function z.destroy(ad)
-z.attached[ad.instance]=nil
+function A.destroy(ad)
+A.attached[ad.instance]=nil
 ac.destroy(ad)
 end
 end
@@ -480,25 +491,25 @@ do
 
 local ac=Vector3.new(1,0,1)
 
-local ad=z
-A=setmetatable({},{__index=ad})
-A.__index=A
+local ad=A
+B=setmetatable({},{__index=ad})
+B.__index=B
 
-function A.__tostring(ae)
+function B.__tostring(ae)
 return"AvatarComponent - "..ae.instance:GetFullName()
 end
-A.attached=nil
+B.attached=nil
 
 
-function A.new(ae,...)
-local af=setmetatable({},A)
+function B.new(ae,...)
+local af=setmetatable({},B)
 af=af:constructor(ae,...)or af
 af:run()
 return af
 end
 
 
-function A.constructor(ae,af)
+function B.constructor(ae,af)
 ad.constructor(ae,af)
 ae.parts={
 ae._maid:add(Instance.new"Part"),
@@ -511,70 +522,70 @@ ae._maid:add(Instance.new"PointLight"),
 ae._maid:add(Instance.new"PointLight"),
 ae._maid:add(Instance.new"PointLight"),
 ae._maid:add(Instance.new"PointLight"),
+ae._maid:add(Instance.new"PointLight"),
 }
 end
 
 
-function A.onStart(ae)
-A.attached=ae
+function B.onStart(ae)
+B.attached=ae
 ad.onStart(ae)
 
-for af =1,4 do
-local ag=ae.parts[af]
-local ah=ae.lights[af]
-local P=ae._maid:add(Instance.new"WeldConstraint")
-
-ag.Size=Vector3.zero
-ag.Massless=true
-ag.CanCollide=false
-ag.CanTouch=false
-ag.CanQuery=false
-
-ah.Enabled=false
-ah.Range=60
-ah.Color=Color3.new(1,1,1)
-ah.Shadows=false
-
-P.Part0=ae.root
-P.Part1=ag
-
-ag.Parent=f
-ah.Parent=ag
-P.Parent=ag
+for af,ag in ipairs(ae.lights)do
+ag.Enabled=false
+ag.Range=60
+ag.Color=Color3.new(1,1,1)
+ag.Shadows=false
 end
+for ah,ai in ipairs(ae.parts)do
+local Q=ai
+local R=ae._maid:add(Instance.new"WeldConstraint")
+local S=ae.lights[ah]
 
-for af,ag in ipairs(ae.parts)do
-local ah=(af-1)*math.pi/2
-ag.Position=ae.root.Position+Vector3.new(math.cos(ah)*25,5,math.sin(ah)*25)
+Q.Size=Vector3.zero
+Q.Massless=true
+Q.CanCollide=false
+Q.CanTouch=false
+Q.CanQuery=false
+
+R.Part0=ae.root
+R.Part1=Q
+
+local T=(ah-1)*math.pi/2
+Q.Position=ae.root.Position+Vector3.new(math.cos(T)*25,5,math.sin(T)*25)
+
+R.Parent=Q
+S.Parent=Q
+Q.Parent=h
 end
+ae.lights[5].Parent=ae.root
 
 while ae.running do
-for ah =1,4 do
-local P=ae.lights[ah]
-P.Enabled=Toggles["character.glow.enabled"].Value
-P.Brightness=Options["character.glow.brightness"].Value/50
+for Q,R in ipairs(ae.lights)do
+R.Enabled=Toggles["character.glow.enabled"].Value
+R.Brightness=Options["character.glow.brightness"].Value/50
 end
-task.wait(0.5)
+task.wait(0.3)
 end
 end
 
-function A.onPhysics(ae,af,ag)
-local ah=Options["character.sprint.speed"].Value
+function B.onPhysics(ae,ah,ai)
+local Q=Options["character.sprint.speed"].Value
 if
-ah>0
+Q>0
 and Toggles["character.sprint.enabled"].Value
 and Options["character.sprint.keybind"]:GetState()
 then
-local P=ae.humanoid.MoveDirection*ac
-if P.Magnitude>0 then
-ae.instance:TranslateBy(P*ah*ag)
+local R=ae.humanoid.MoveDirection*ac
+if R.Magnitude>0 then
+ae.instance:TranslateBy(R*Q*ai)
 end
 end
 end
 
 
-function A.destroy(ae)
-A.attached=nil
+function B.destroy(ae)
+B.attached=nil
 ad.destroy(ae)
 end
 end
@@ -585,108 +596,108 @@ do
 
 local ac=Vector3.new(5,7,0)
 local ad=Vector3.new(0,-0.25,0)
-local ae,af,ag,ah=
+local ae,ah,ai,Q=
 CFrame.new(ad.X-(ac.X/2),ad.Y+(ac.Y/2),ad.Z),
 CFrame.new(ad.X+(ac.X/2),ad.Y+(ac.Y/2),ad.Z),
 CFrame.new(ad.X-(ac.X/2),ad.Y-(ac.Y/2),ad.Z),
 CFrame.new(ad.X+(ac.X/2),ad.Y-(ac.Y/2),ad.Z)
-local P=u.WorldToViewportPoint
-local Q=Vector2.new
-local R=math.min
+local R=v.WorldToViewportPoint
+local S=Vector2.new
+local T=math.min
 
-local S=z
-B=setmetatable({},{__index=S})
-B.__index=B
+local U=A
+C=setmetatable({},{__index=U})
+C.__index=C
 
-function B.__tostring(T)
-return"FriendComponent - "..T.instance:GetFullName()
+function C.__tostring(V)
+return"FriendComponent - "..V.instance:GetFullName()
 end
-B.attached={}
+C.attached={}
 
 
-function B.new(T,...)
-local U=setmetatable({},B)
-U=U:constructor(T,...)or U
-U:run()
-return U
-end
-
-
-function B.constructor(T,U)
-S.constructor(T,U)
-T.quad=Drawing.new"Quad"
-T._maid:add(T.quad,"Remove")
+function C.new(V,...)
+local W=setmetatable({},C)
+W=W:constructor(V,...)or W
+W:run()
+return W
 end
 
 
-function B.onStart(T)
-B.attached[T.instance]=T
-S.onStart(T)
-
-local U=T.quad
-U.Visible=false
-U.Thickness=1
-U.Transparency=0.75
+function C.constructor(V,W)
+U.constructor(V,W)
+V.quad=Drawing.new"Quad"
+V._maid:add(V.quad,"Remove")
 end
 
-function B.onRender(T,U)
-local V=T.quad
+
+function C.onStart(V)
+C.attached[V.instance]=V
+U.onStart(V)
+
+local W=V.quad
+W.Visible=false
+W.Thickness=1
+W.Transparency=0.75
+end
+
+function C.onRender(V,W)
+local X=V.quad
 if Toggles["esp.player.enabled"].Value then
-local W=T.root.CFrame
-local X=P(u,(W*ae).Position)
-local Y=P(u,(W*af).Position)
-local Z=P(u,(W*ah).Position)
-local _=P(u,(W*ag).Position)
-if R(X.Z,Y.Z,Z.Z,_.Z)>0 then
-V.PointA=Q(Y.X,Y.Y)
-V.PointB=Q(X.X,X.Y)
-V.PointC=Q(_.X,_.Y)
-V.PointD=Q(Z.X,Z.Y)
-V.Color=Options["esp.player.color"].Value
-V.Visible=true
+local Y=V.root.CFrame
+local Z=R(v,(Y*ae).Position)
+local _=R(v,(Y*ah).Position)
+local aj=R(v,(Y*Q).Position)
+local ak=R(v,(Y*ai).Position)
+if T(Z.Z,_.Z,aj.Z,ak.Z)>0 then
+X.PointA=S(_.X,_.Y)
+X.PointB=S(Z.X,Z.Y)
+X.PointC=S(ak.X,ak.Y)
+X.PointD=S(aj.X,aj.Y)
+X.Color=Options["esp.player.color"].Value
+X.Visible=true
 else
-V.Visible=false
+X.Visible=false
 end
 else
-V.Visible=false
+X.Visible=false
 end
 end
 
 
-function B.destroy(T)
-B.attached[T.instance]=nil
-S.destroy(T)
+function C.destroy(aj)
+C.attached[aj.instance]=nil
+U.destroy(aj)
 end
 end
 
 
 
 do
-local ac=s
-C=setmetatable({},{__index=ac})
-C.__index=C
+local ac=t
+D=setmetatable({},{__index=ac})
+D.__index=D
 
-function C.__tostring(ad)
+function D.__tostring(ad)
 return"ClientComponent - "..ad.instance:GetFullName()
 end
-C.attached={}
+D.attached={}
 
 
-function C.new(ad,...)
-local ae=setmetatable({},C)
+function D.new(ad,...)
+local ae=setmetatable({},D)
 ae=ae:constructor(ad,...)or ae
 ae:run()
 return ae
 end
 
 
-function C.constructor(ad,ae)
+function D.constructor(ad,ae)
 ac.constructor(ad,ae)
 end
 
 
-function C.onStart(ad)
-C.attached[ad.instance]=ad
+function D.onStart(ad)
+D.attached[ad.instance]=ad
 ac.onStart(ad)
 ad._maid:add(ad.instance.CharacterAdded:Connect(function(ae)
 ad:onCharacter(ae)
@@ -703,148 +714,53 @@ ad:onCharacter(ae)
 end
 end)
 task.defer(function()
-for ae,af in ipairs(ad.instance.Backpack:GetChildren())do
-if af:IsA"Tool"then
-ad:onTool(af)
+for ae,ah in ipairs(ad.instance.Backpack:GetChildren())do
+if ah:IsA"Tool"then
+ad:onTool(ah)
 end
 end
 end)
 end
 
-function C.onCharacter(ad,ae)
-if ad.instance==t then
-ad.character=A.new(ae)
-else
+function D.onCharacter(ad,ae)
+if ad.instance==u then
 ad.character=B.new(ae)
+else
+ad.character=C.new(ae)
 end
 end
 
-function C.onTool(ad,ae)
+function D.onTool(ad,ae)
 if ae.Name=="LibraryHintPaper"then
-local af=ae:WaitForChild("UI",1)
-if af then
-local ag={}
-for ah =1,5 do
-local P=af:FindFirstChild(tostring(ah))
-if P then
-local Q=P.ImageRectOffset.X/50
-ag[ah]=Q
+local ah=ae:WaitForChild("UI",1)
+if ah then
+local ai={}
+for aj =1,5 do
+local ak=ah:FindFirstChild(tostring(aj))
+if ak then
+local Q=ak.ImageRectOffset.X/50
+ai[aj]=Q
 end
 end
-libraryOrder=ag
+libraryOrder=ai
 end
 end
 end
 
 
-function C.destroy(ad)
-C.attached[ad.instance]=nil
+function D.destroy(ad)
+D.attached[ad.instance]=nil
 ac.destroy(ad)
 end
 
 
 local ad=function(ad)
-C.new(ad)
+D.new(ad)
 end
 
-b.PlayerAdded:Connect(ad)
-for ae,af in ipairs(b:GetPlayers())do
-task.defer(ad,af)
-end
-end
-
-
-
-do
-
-local ac=Vector3.new(4,6,0)
-local ad=Vector3.new(0,0,0)
-local ae,af,ag,ah=
-CFrame.new(ad.X-(ac.X/2),ad.Y+(ac.Y/2),ad.Z),
-CFrame.new(ad.X+(ac.X/2),ad.Y+(ac.Y/2),ad.Z),
-CFrame.new(ad.X-(ac.X/2),ad.Y-(ac.Y/2),ad.Z),
-CFrame.new(ad.X+(ac.X/2),ad.Y-(ac.Y/2),ad.Z)
-local P=u.WorldToViewportPoint
-local Q=Vector2.new
-local R=math.min
-
-local S=s
-D=setmetatable({},{__index=S})
-D.__index=D
-
-function D.__tostring(T)
-return"A60Component - "..T.instance:GetFullName()
-end
-D.attached={}
-
-
-function D.new(T,...)
-local U=setmetatable({},D)
-U=U:constructor(T,...)or U
-U:run()
-return U
-end
-
-
-function D.constructor(T,U)
-S.constructor(T,U)
-T.root=U.PrimaryPart or U:WaitForChild("Main",5)
-assert(T.root,"["..T:__tostring().."] is missing a root part!")
-T.quad=Drawing.new"Quad"
-T._maid:add(T.quad,"Remove")
-end
-
-
-function D.onStart(T)
-D.attached[T.instance]=T
-S.onStart(T)
-
-local U=T.quad
-U.Visible=false
-U.Thickness=1
-U.Color=T:getColor()
-
-ab(Toggles["alerts.entity"].Value,{
-message="A60 spawned, run and hide in the closest locker!",
-duration=7.5,
-audio=true,
-})
-end
-
-function D.onRender(T,U)
-local V=T.quad
-if T:isEnabled()then
-local W=T.root.CFrame
-local X=P(u,(W*ae).Position)
-local Y=P(u,(W*af).Position)
-local Z=P(u,(W*ah).Position)
-local _=P(u,(W*ag).Position)
-if R(X.Z,Y.Z,Z.Z,_.Z)>0 then
-V.PointA=Q(Y.X,Y.Y)
-V.PointB=Q(X.X,X.Y)
-V.PointC=Q(_.X,_.Y)
-V.PointD=Q(Z.X,Z.Y)
-V.Visible=true
-else
-V.Visible=false
-end
-else
-V.Visible=false
-end
-end
-
-
-function D.isEnabled(T)
-return Toggles["esp.rush.enabled"].Value
-end
-
-function D.getColor(T)
-return Options["esp.rush.a60-color"].Value
-end
-
-function D.destroy(T)
-D.attached[T.instance]=nil
-S.destroy(T)
+d.PlayerAdded:Connect(ad)
+for ae,ah in ipairs(d:GetPlayers())do
+task.defer(ad,ah)
 end
 end
 
@@ -854,21 +770,21 @@ do
 
 local ac=Vector3.new(4,6,0)
 local ad=Vector3.new(0,0,0)
-local ae,af,ag,ah=
+local ae,ah,ai,aj=
 CFrame.new(ad.X-(ac.X/2),ad.Y+(ac.Y/2),ad.Z),
 CFrame.new(ad.X+(ac.X/2),ad.Y+(ac.Y/2),ad.Z),
 CFrame.new(ad.X-(ac.X/2),ad.Y-(ac.Y/2),ad.Z),
 CFrame.new(ad.X+(ac.X/2),ad.Y-(ac.Y/2),ad.Z)
-local P=u.WorldToViewportPoint
+local ak=v.WorldToViewportPoint
 local Q=Vector2.new
 local R=math.min
 
-local S=s
+local S=t
 E=setmetatable({},{__index=S})
 E.__index=E
 
 function E.__tostring(T)
-return"A120Component - "..T.instance:GetFullName()
+return"A60Component - "..T.instance:GetFullName()
 end
 E.attached={}
 
@@ -900,7 +816,7 @@ U.Thickness=1
 U.Color=T:getColor()
 
 ab(Toggles["alerts.entity"].Value,{
-message="A120 spawned, run and hide in the closest locker!",
+message="A60 spawned, run and hide in the closest locker!",
 duration=7.5,
 audio=true,
 })
@@ -910,10 +826,10 @@ function E.onRender(T,U)
 local V=T.quad
 if T:isEnabled()then
 local W=T.root.CFrame
-local X=P(u,(W*ae).Position)
-local Y=P(u,(W*af).Position)
-local Z=P(u,(W*ah).Position)
-local _=P(u,(W*ag).Position)
+local X=ak(v,(W*ae).Position)
+local Y=ak(v,(W*ah).Position)
+local Z=ak(v,(W*aj).Position)
+local _=ak(v,(W*ai).Position)
 if R(X.Z,Y.Z,Z.Z,_.Z)>0 then
 V.PointA=Q(Y.X,Y.Y)
 V.PointB=Q(X.X,X.Y)
@@ -934,11 +850,106 @@ return Toggles["esp.rush.enabled"].Value
 end
 
 function E.getColor(T)
-return Options["esp.rush.a120-color"].Value
+return Options["esp.rush.a60-color"].Value
 end
 
 function E.destroy(T)
 E.attached[T.instance]=nil
+S.destroy(T)
+end
+end
+
+
+
+do
+
+local ac=Vector3.new(4,6,0)
+local ad=Vector3.new(0,0,0)
+local ae,ah,ai,aj=
+CFrame.new(ad.X-(ac.X/2),ad.Y+(ac.Y/2),ad.Z),
+CFrame.new(ad.X+(ac.X/2),ad.Y+(ac.Y/2),ad.Z),
+CFrame.new(ad.X-(ac.X/2),ad.Y-(ac.Y/2),ad.Z),
+CFrame.new(ad.X+(ac.X/2),ad.Y-(ac.Y/2),ad.Z)
+local ak=v.WorldToViewportPoint
+local Q=Vector2.new
+local R=math.min
+
+local S=t
+F=setmetatable({},{__index=S})
+F.__index=F
+
+function F.__tostring(T)
+return"A120Component - "..T.instance:GetFullName()
+end
+F.attached={}
+
+
+function F.new(T,...)
+local U=setmetatable({},F)
+U=U:constructor(T,...)or U
+U:run()
+return U
+end
+
+
+function F.constructor(T,U)
+S.constructor(T,U)
+T.root=U.PrimaryPart or U:WaitForChild("Main",5)
+assert(T.root,"["..T:__tostring().."] is missing a root part!")
+T.quad=Drawing.new"Quad"
+T._maid:add(T.quad,"Remove")
+end
+
+
+function F.onStart(T)
+F.attached[T.instance]=T
+S.onStart(T)
+
+local U=T.quad
+U.Visible=false
+U.Thickness=1
+U.Color=T:getColor()
+
+ab(Toggles["alerts.entity"].Value,{
+message="A120 spawned, run and hide in the closest locker!",
+duration=7.5,
+audio=true,
+})
+end
+
+function F.onRender(T,U)
+local V=T.quad
+if T:isEnabled()then
+local W=T.root.CFrame
+local X=ak(v,(W*ae).Position)
+local Y=ak(v,(W*ah).Position)
+local Z=ak(v,(W*aj).Position)
+local _=ak(v,(W*ai).Position)
+if R(X.Z,Y.Z,Z.Z,_.Z)>0 then
+V.PointA=Q(Y.X,Y.Y)
+V.PointB=Q(X.X,X.Y)
+V.PointC=Q(_.X,_.Y)
+V.PointD=Q(Z.X,Z.Y)
+V.Visible=true
+else
+V.Visible=false
+end
+else
+V.Visible=false
+end
+end
+
+
+function F.isEnabled(T)
+return Toggles["esp.rush.enabled"].Value
+end
+
+function F.getColor(T)
+return Options["esp.rush.a120-color"].Value
+end
+
+function F.destroy(T)
+F.attached[T.instance]=nil
 S.destroy(T)
 ab(Toggles["alerts.entity"].Value,{
 message="A120 despawned, you are safe to continue your run!",
@@ -953,67 +964,67 @@ end
 do
 
 local ac=CFrame.new(0,0,1)
-local ad=u.WorldToViewportPoint
+local ad=v.WorldToViewportPoint
 local ae=Vector2.new
-local af=math.min
+local ah=math.min
 
-local ag=s
-F=setmetatable({},{__index=ag})
-F.__index=F
+local ai=t
+G=setmetatable({},{__index=ai})
+G.__index=G
 
-function F.__tostring(ah)
-return"DoorComponent - "..ah.instance:GetFullName()
+function G.__tostring(aj)
+return"DoorComponent - "..aj.instance:GetFullName()
 end
-F.attached={}
+G.attached={}
 
 
-function F.new(ah,...)
-local P=setmetatable({},F)
-P=P:constructor(ah,...)or P
-P:run()
-return P
-end
-
-
-function F.constructor(ah,P,Q)
-ag.constructor(ah,P)
-ah.id=Q or 0
-
-local R=P.Size*0.5
-local S=P.CFrame*ac
-ah.tl=(S*CFrame.new(R.X,R.Y,0)).Position
-ah.tr=(S*CFrame.new(-R.X,R.Y,0)).Position
-ah.bl=(S*CFrame.new(R.X,-R.Y,0)).Position
-ah.br=(S*CFrame.new(-R.X,-R.Y,0)).Position
-
-ah.quad=Drawing.new"Quad"
-ah._maid:add(ah.quad,"Remove")
+function G.new(aj,...)
+local ak=setmetatable({},G)
+ak=ak:constructor(aj,...)or ak
+ak:run()
+return ak
 end
 
 
-function F.onStart(ah)
-F.attached[ah.instance]=ah
-ag.onStart(ah)
+function G.constructor(aj,ak,Q)
+ai.constructor(aj,ak)
+aj.id=Q or 0
 
-local P=ah.quad
-P.Visible=false
-P.Thickness=2
+local R=ak.Size*0.5
+local S=ak.CFrame*ac
+aj.tl=(S*CFrame.new(R.X,R.Y,0)).Position
+aj.tr=(S*CFrame.new(-R.X,R.Y,0)).Position
+aj.bl=(S*CFrame.new(R.X,-R.Y,0)).Position
+aj.br=(S*CFrame.new(-R.X,-R.Y,0)).Position
+
+aj.quad=Drawing.new"Quad"
+aj._maid:add(aj.quad,"Remove")
 end
 
-function F.onRender(ah,P)
-local Q=ah.quad
+
+function G.onStart(aj)
+G.attached[aj.instance]=aj
+ai.onStart(aj)
+
+local ak=aj.quad
+ak.Visible=false
+ak.Thickness=2
+end
+
+function G.onRender(aj,ak)
+local Q=aj.quad
 if Toggles["esp.door.enabled"].Value then
-local R=ad(u,ah.tl)
-local S=ad(u,ah.tr)
-local T=ad(u,ah.br)
-local U=ad(u,ah.bl)
-if af(R.Z,S.Z,T.Z,U.Z)>0 then
+local R=ad(v,aj.tl)
+local S=ad(v,aj.tr)
+local T=ad(v,aj.br)
+local U=ad(v,aj.bl)
+if ah(R.Z,S.Z,T.Z,U.Z)>0 then
 Q.PointA=ae(S.X,S.Y)
 Q.PointB=ae(R.X,R.Y)
 Q.PointC=ae(U.X,U.Y)
 Q.PointD=ae(T.X,T.Y)
 
-local V=ah.id-v.LatestRoom.Value
+local V=aj.id-w.LatestRoom.Value
 if V==0 then
 Q.Color=Options["esp.door.target-color"].Value
 else
@@ -1035,9 +1046,9 @@ end
 end
 
 
-function F.destroy(ah)
-F.attached[ah.instance]=nil
-ag.destroy(ah)
+function G.destroy(aj)
+G.attached[aj.instance]=nil
+ai.destroy(aj)
 end
 end
 
@@ -1047,34 +1058,34 @@ do
 
 local ac=Vector3.new(4.675,7.15,0)
 local ad=Vector3.new(0,0,-1.25)
-local ae,af,ag,ah=
+local ae,ah,ai,aj=
 CFrame.new(ad.X-(ac.X/2),ad.Y+(ac.Y/2),ad.Z),
 CFrame.new(ad.X+(ac.X/2),ad.Y+(ac.Y/2),ad.Z),
 CFrame.new(ad.X-(ac.X/2),ad.Y-(ac.Y/2),ad.Z),
 CFrame.new(ad.X+(ac.X/2),ad.Y-(ac.Y/2),ad.Z)
-local P=u.WorldToViewportPoint
+local ak=v.WorldToViewportPoint
 local Q=Vector2.new
 local R=math.min
 
-local S=s
-G=setmetatable({},{__index=S})
-G.__index=G
+local S=t
+H=setmetatable({},{__index=S})
+H.__index=H
 
-function G.__tostring(T)
+function H.__tostring(T)
 return"WardrobeComponent - "..T.instance:GetFullName()
 end
-G.attached={}
+H.attached={}
 
 
-function G.new(T,...)
-local U=setmetatable({},G)
+function H.new(T,...)
+local U=setmetatable({},H)
 U=U:constructor(T,...)or U
 U:run()
 return U
 end
 
 
-function G.constructor(T,U,V)
+function H.constructor(T,U,V)
 S.constructor(T,U)
 T.id=V
 T.root=U:WaitForChild("Base",5)
@@ -1085,8 +1096,8 @@ T._maid:add(T.quad,"Remove")
 end
 
 
-function G.onStart(T)
-G.attached[T.instance]=T
+function H.onStart(T)
+H.attached[T.instance]=T
 S.onStart(T)
 
 local U=T.quad
@@ -1094,14 +1105,14 @@ U.Visible=false
 U.Thickness=2
 end
 
-function G.onRender(T,U)
+function H.onRender(T,U)
 local V=T.quad
 if Toggles["esp.locker.enabled"].Value then
 local W=T.root.CFrame
-local X=P(u,(W*ae).Position)
-local Y=P(u,(W*af).Position)
-local Z=P(u,(W*ah).Position)
-local _=P(u,(W*ag).Position)
+local X=ak(v,(W*ae).Position)
+local Y=ak(v,(W*ah).Position)
+local Z=ak(v,(W*aj).Position)
+local _=ak(v,(W*ai).Position)
 if R(X.Z,Y.Z,Z.Z,_.Z)>0 then
 V.PointA=Q(Y.X,Y.Y)
 V.PointB=Q(X.X,X.Y)
@@ -1110,7 +1121,7 @@ V.PointD=Q(Z.X,Z.Y)
 V.Color=Options["esp.locker.color"].Value
 if T.occupant.Value then
 V.Transparency=0.10
-elseif v.LatestRoom.Value-T.id>1 then
+elseif w.LatestRoom.Value-T.id>1 then
 V.Transparency=0.25
 else
 V.Transparency=0.60
@@ -1125,8 +1136,8 @@ end
 end
 
 
-function G.destroy(T)
-G.attached[T.instance]=nil
+function H.destroy(T)
+H.attached[T.instance]=nil
 S.destroy(T)
 end
 end
@@ -1135,61 +1146,61 @@ end
 
 do
 
-local ac=u.WorldToViewportPoint
+local ac=v.WorldToViewportPoint
 local ad=Vector2.new
 local ae=ad(0,3)
 
-local af=s
-H=setmetatable({},{__index=af})
-H.__index=H
+local ah=t
+I=setmetatable({},{__index=ah})
+I.__index=I
 
-function H.__tostring(ag)
-return"InteractableComponent - "..ag.instance:GetFullName()
+function I.__tostring(ai)
+return"InteractableComponent - "..ai.instance:GetFullName()
 end
-H.attached={}
+I.attached={}
 
 
-function H.new(ag,ah,...)
-local P=setmetatable({},H)
-P=P:constructor(ag,ah,...)or P
-P:run()
-return P
+function I.new(ai,aj,...)
+local ak=setmetatable({},I)
+ak=ak:constructor(ai,aj,...)or ak
+ak:run()
+return ak
 end
 
 
-function H.constructor(ag,ah,P)
-af.constructor(ag,ah)
-ag.name=P
-ag.label=Drawing.new"Text"
-ag.circle=Drawing.new"Circle"
-ag.outline=Drawing.new"Circle"
-ag._maid:add(ag.label,"Remove")
-ag._maid:add(ag.circle,"Remove")
-ag._maid:add(ag.outline,"Remove")
-ag._maid:add(ah.AncestryChanged:Connect(function(Q,R)
+function I.constructor(ai,aj,ak)
+ah.constructor(ai,aj)
+ai.name=ak
+ai.label=Drawing.new"Text"
+ai.circle=Drawing.new"Circle"
+ai.outline=Drawing.new"Circle"
+ai._maid:add(ai.label,"Remove")
+ai._maid:add(ai.circle,"Remove")
+ai._maid:add(ai.outline,"Remove")
+ai._maid:add(aj.AncestryChanged:Connect(function(Q,R)
 if R==nil then
-ag:destroy()
+ai:destroy()
 end
 end))
 end
 
 
-function H.onStart(ag)
-H.attached[ag.instance]=ag
-af.onStart(ag)
+function I.onStart(ai)
+I.attached[ai.instance]=ai
+ah.onStart(ai)
 
-local ah,P,Q=ag.label,ag.circle,ag.outline
-ah.Text=ag.name
-ah.Size=18
-ah.Center=true
-ah.Outline=true
-ah.Visible=false
+local aj,ak,Q=ai.label,ai.circle,ai.outline
+aj.Text=ai.name
+aj.Size=18
+aj.Center=true
+aj.Outline=true
+aj.Visible=false
 
-P.Thickness=1
-P.NumSides=6
-P.Radius=5
-P.Filled=true
-P.Visible=false
+ak.Thickness=1
+ak.NumSides=6
+ak.Radius=5
+ak.Filled=true
+ak.Visible=false
 
 Q.Color=Color3.new()
 Q.Thickness=1.5
@@ -1200,92 +1211,43 @@ Q.Visible=false
 Q.ZIndex=2
 end
 
-function H.onRender(ag,ah)
-local P,Q,R=ag.label,ag.circle,ag.outline
-if ag:isVisualEnabled()then
-local S=ac(u,ag.instance.Position)
+function I.onRender(ai,aj)
+local ak,Q,R=ai.label,ai.circle,ai.outline
+if ai:isVisualEnabled()then
+local S=ac(v,ai.instance.Position)
 local T=S.Z>0
 if T then
 local U=ad(S.X,S.Y)
-P.Position=U+ae
+ak.Position=U+ae
 Q.Position=U
 R.Position=U
 
-local V=ag:getColor()
-P.Color=V
+local V=ai:getColor()
+ak.Color=V
 Q.Color=V
 end
-P.Visible=T
+ak.Visible=T
 Q.Visible=T
 R.Visible=T
 else
-P.Visible=false
+ak.Visible=false
 Q.Visible=false
 R.Visible=false
 end
 end
 
 
-function H.isVisualEnabled(ag)
+function I.isVisualEnabled(ai)
 return Toggles["esp.interactable.enabled"].Value
 end
 
-function H.getColor(ag)
+function I.getColor(ai)
 return Options["esp.interactable.color"].Value
 end
 
-function H.destroy(ag)
-H.attached[ag.instance]=nil
-af.destroy(ag)
-end
-end
-
-
-
-do
-local ac=H
-I=setmetatable({},{__index=ac})
-I.__index=I
-
-function I.__tostring(ad)
-return"ObtainableComponent - "..ad.instance:GetFullName()
-end
-I.attached={}
-
-
-function I.new(ad,ae,...)
-local af=setmetatable({},I)
-af=af:constructor(ad,ae,...)or af
-af:run()
-return af
-end
-
-
-function I.constructor(ad,ae,af)
-ac.constructor(ad,ae,af)
-end
-
-
-function I.onStart(ad)
-I.attached[ad.instance]=ad
-ac.onStart(ad)
-local ae,af,ag=ad.label,ad.circle,ad.outline
-af.NumSides=5
-ag.NumSides=5
-end
-
-
-function I.isVisualEnabled(ad)
-return Toggles["esp.obtainable.enabled"].Value
-end
-
-function I.getColor(ad)
-return Options["esp.obtainable.color"].Value
-end
-
-function I.destroy(ad)
-I.attached[ad.instance]=nil
-ac.destroy(ad)
+function I.destroy(ai)
+I.attached[ai.instance]=nil
+ah.destroy(ai)
 end
 end
 
@@ -1297,25 +1259,74 @@ J=setmetatable({},{__index=ac})
 J.__index=J
 
 function J.__tostring(ad)
+return"ObtainableComponent - "..ad.instance:GetFullName()
+end
+J.attached={}
+
+
+function J.new(ad,ae,...)
+local ah=setmetatable({},J)
+ah=ah:constructor(ad,ae,...)or ah
+ah:run()
+return ah
+end
+
+
+function J.constructor(ad,ae,ah)
+ac.constructor(ad,ae,ah)
+end
+
+
+function J.onStart(ad)
+J.attached[ad.instance]=ad
+ac.onStart(ad)
+local ae,ah,ai=ad.label,ad.circle,ad.outline
+ah.NumSides=5
+ai.NumSides=5
+end
+
+
+function J.isVisualEnabled(ad)
+return Toggles["esp.obtainable.enabled"].Value
+end
+
+function J.getColor(ad)
+return Options["esp.obtainable.color"].Value
+end
+
+function J.destroy(ad)
+J.attached[ad.instance]=nil
+ac.destroy(ad)
+end
+end
+
+
+
+do
+local ac=J
+K=setmetatable({},{__index=ac})
+K.__index=K
+
+function K.__tostring(ad)
 return"GoldComponent - "..ad.instance:GetFullName()
 end
 
 
-function J.new(ad,...)
-local ae=setmetatable({},J)
+function K.new(ad,...)
+local ae=setmetatable({},K)
 ae=ae:constructor(ad,...)or ae
 ae:run()
 return ae
 end
 
 
-function J.constructor(ad,ae)
+function K.constructor(ad,ae)
 ac.constructor(ad,ae,"Gold")
 ad.denomination=0
 end
 
 
-function J.onStart(ad)
+function K.onStart(ad)
 ac.onStart(ad)
 ad:onDenominationChanged()
 ad.instance:GetAttributeChangedSignal"GoldValue":Connect(function()
@@ -1323,21 +1334,21 @@ ad:onDenominationChanged()
 end)
 end
 
-function J.onRender(ad,ae)
+function K.onRender(ad,ae)
 ad.label.Text=Options["esp.gold.format"].Value:gsub("{amount}",tostring(ad.denomination))
 ac.onRender(ad,ae)
 end
 
-function J.onDenominationChanged(ad)
+function K.onDenominationChanged(ad)
 ad.denomination=ad.instance.Parent:GetAttribute"GoldValue"or 0
 end
 
 
-function J.isVisualEnabled(ad)
+function K.isVisualEnabled(ad)
 return Toggles["esp.gold.enabled"].Value and ad.denomination>=Options["esp.gold.minimum"].Value
 end
 
-function J.getColor(ad)
+function K.getColor(ad)
 return Options["esp.gold.color"].Value
 end
 end
@@ -1347,125 +1358,134 @@ end
 do local ac=function()
 
 
-return Toggles["auto-loot.enabled"].Value and Options["auto-loot.keybind"]:GetState()end
+return Toggles["interact.enabled"].Value and Options["interact.keybind"]:GetState()end
 
 
-local ad=s
-K=setmetatable({},{__index=ad})
-K.__index=K
+local ad=t
+L=setmetatable({},{__index=ad})
+L.__index=L
 
-function K.__tostring(ae)
+function L.__tostring(ae)
 return"RoomComponent - "..ae.instance:GetFullName()
 end
-K.attached={}
+L.attached={}
 
 
-function K.new(ae,...)
-local af=setmetatable({},K)
-af=af:constructor(ae,...)or af
-af:run()
-return af
+function L.new(ae,...)
+local ah=setmetatable({},L)
+ah=ah:constructor(ae,...)or ah
+ah:run()
+return ah
 end
 
 
-function K.constructor(ae,af)
-ad.constructor(ae,af)
-ae.id=tonumber(af.Name)
-ae.assets=af:WaitForChild("Assets",5)
+function L.constructor(ae,ah)
+ad.constructor(ae,ah)
+ae.id=tonumber(ah.Name)
+ae.assets=ah:WaitForChild("Assets",5)
 end
 
 
-function K.onStart(ae)
-K.attached[ae.instance]=ae
+function L.onStart(ae)
+L.attached[ae.instance]=ae
 ad.onStart(ae)
 
-local af=ae.instance:WaitForChild("RoomExit",5)
-if af then
-F.new(af,ae.id)
+local ah=ae.instance:WaitForChild("RoomExit",5)
+if ah then
+G.new(ah,ae.id)
 end
 
 
-ae._maid:add(ae.instance.DescendantAdded:Connect(function(ag)
-ae:onDescendant(ag)
+ae._maid:add(ae.instance.DescendantAdded:Connect(function(ai)
+ae:onDescendant(ai)
 end))
-for ag,ah in ipairs(ae.instance:GetDescendants())do
-task.defer(ae.onDescendant,ae,ah)
+for ai,aj in ipairs(ae.instance:GetDescendants())do
+task.defer(ae.onDescendant,ae,aj)
 end
 end
 
-function K.onDescendant(ae,af)
-local ag=af.Parent
-local ah=ag.Name
-local P=af.Name
-if P=="Main"then
-if ah=="LeverForGate"then
-H.new(af,"Lever")
-elseif ah=="Lighter"then
-I.new(af,"Lighter")
-elseif ah=="Vitamins"then
-I.new(af,"Vitamins")
-elseif ah=="Lockpick"then
-I.new(af,"Lockpicks")
-elseif ah=="Bandage"then
-I.new(af,"Bandages")
-elseif ah=="Battery"then
-I.new(af,"Batteries")
+function L.onDescendant(ae,ah)
+local ai=ah.Parent
+local aj=ai.Name
+local ak=ah.Name
+if ak=="Main"then
+if aj=="Battery"then
+J.new(ah,"Batteries")
 end
-elseif P=="Holder"then
-if ah=="CrucifixWall"then
-I.new(af,"Crucifix")
-end
-elseif P=="Rooms_Locker"or P=="Rooms_Locker_Fridge"then
-G.new(af,ae.id)
-elseif P=="Hitbox"then
-if ah=="GoldPile"then
-J.new(af)
+elseif ak=="Rooms_Locker"or ak=="Rooms_Locker_Fridge"then
+H.new(ah,ae.id)
+elseif ak=="Hitbox"then
+if aj=="GoldPile"then
+K.new(ah)
 end
 end
 
 
-if af:IsA"ProximityPrompt"then
-local Q=r.new()
+if ah:IsA"ProximityPrompt"then
+local Q=s.new()
 ae._maid:add(Q)
 
 local R
-local S=af
+local S=ah
 local T=os.clock()
-local U=S.MaxActivationDistance+5
+
+local U=""
+local V=0.2
+local W=1
+local X=S.MaxActivationDistance+5
 
 
-if ah=="GoldPile"then
-R=ag:WaitForChild("Hitbox",5)
+if aj=="GoldPile"then
+U="Gold"
+R=ai:WaitForChild("Hitbox",5)
 end
 
 
-if ah=="Battery"then
-R=ag:WaitForChild("Main",5)
+if aj=="Battery"then
+U="Battery"
+V=0.5
+W=math.huge
+
+R=ai:WaitForChild("Main",5)
 end
 
 
 if R then
-Q:add(d.Heartbeat:Connect(function()
-if not S:IsDescendantOf(ae.instance)then
+local Y=game.IsDescendantOf local Z=function()
+
+
+if not ae.destructed and Y(S,ae.instance)then
+local Z=S:GetAttribute"Interactions"
+if not Z or Z<W then
+return true
+end
+end
+return false end local _=function()
+
+
+if ac()then
+local _=Options["interact.filter"].Value
+return _[U]==nil
+end
+return false end
+
+
+Q:add(f.Heartbeat:Connect(function()
+if not Z()then
 return Q:destroy()
 end
-local V=S:GetAttribute"Interactions"
-if V then
-return Q:destroy()
-end
-if not ac()then
-return
-end
-local W=os.clock()
-if W-T<m then
+if not _()then
 return
 end
 
-local X=A.attached
-local Y=(R.Position-X.root.Position).Magnitude
-if Y<=U then
+local al=os.clock()
+if al-T>=V then
+local am=B.attached
+local an=(R.Position-am.root.Position).Magnitude
+if an<=X then
 fireproximityprompt(S)
-T=W
+T=al
+end
 end
 end))
 end
@@ -1475,10 +1495,329 @@ end
 end
 
 
-function K.destroy(ae)
-K.attached[ae.instance]=nil
+function L.destroy(ae)
+L.attached[ae.instance]=nil
 ad.destroy(ae)
 end
+
+
+local ae=function(ae)
+L.new(ae)
+end
+z:add(h.CurrentRooms.ChildAdded:Connect(ae))
+for ah,ai in ipairs(h.CurrentRooms:GetChildren())do
+ae(ai)
+end
+end
+
+
+
+local ac
+do
+
+local ad=Vector3.new(1,0,1)
+
+local ae=t
+ac=setmetatable({},{__index=ae})
+ac.__index=ac
+
+function ac.__tostring(ah)
+return"PathfindRoom - "..ah.instance.Name
+end
+ac.attached={}
+
+
+function ac.new(ah,...)
+local ai=setmetatable({},ac)
+ai=ai:constructor(ah,...)or ai
+ai:run()
+return ai
+end
+
+
+function ac.constructor(ah,ai)
+ae.constructor(ah,ai)
+ah.id=tonumber(ai.Name)
+ah.generation_id=ai:GetAttribute"OriginalName"
+ah.index=1
+ah.nodes={}
+ah.entrance=ai:WaitForChild("RoomEntrance",5)
+ah.exit=ai:WaitForChild("RoomExit",5)
+end
+
+
+function ac.onStart(ah)
+
+ah:generateNodes()
+if ah.generation_id=="Rooms_End"and Toggles["pathfinder.stop-on-exit"].Value then
+ah.nodes[#ah.nodes]=nil
+end
+
+
+ae.onStart(ah)
+ac.attached[ah.instance]=ah
+
+
+local ai=tostring(ah.id)
+local aj=ah.instance:GetAttribute"OriginalName"
+local ak=Toggles["alerts.debug"].Value
+if#ah.nodes>1 then
+ab(ak,{
+message="Room "..ai.." recognized! Generating nodes for: "..aj,
+duration=5,
+})
+else
+ab(ak,{
+message="Room "..ai.." is not recognized! No nodes found for: "..aj,
+duration=5,
+})
+end
+end
+
+function ac.onPhysics(ah,ai,aj)
+if not ah:isValid()then
+return ah:destroy()
+end
+if ah:isCurrent()then
+local ak=B.attached
+if not ak then
+return
+end
+local al=ak.root
+local am=ak.humanoid
+if al.Anchored or am.MoveDirection.Magnitude>0 then
+return
+end
+
+local an=ah.entrance.CFrame*ah.nodes[ah.index]
+
+local Q=ak.root.Position
+local R=(an-Q)*ad
+local S=R.Magnitude
+if S<=0.5 then
+ah:onNode(ah.index+1)
+else
+local T=R.Unit
+local U=Options["pathfinder.speed"].Value*aj
+ak.instance:PivotTo(CFrame.new(Q+(T*U)))
+end
+end
+end
+
+function ac.onNode(ah,ai)
+if ai<=#ah.nodes then
+ah.index=ai
+else
+ah:destroy()
+end
+end
+
+
+function ac.isValid(ah)
+return ah.id>=w.LatestRoom.Value
+end
+
+function ac.isCurrent(ah)
+return ah.id==w.LatestRoom.Value
+end
+
+function ac.generateNodes(ah)
+local ai=ah.nodes
+local aj=ah.generation_id
+local ak=ah.entrance.CFrame:ToObjectSpace(ah.exit.CFrame).Position
+
+table.insert(ai,CFrame.new(0,0,0))
+
+
+if aj=="Rooms_Start"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(0,0,-35.75))
+elseif aj=="Rooms_End"then
+table.insert(ai,CFrame.new(0,0,-5))
+table.insert(ai,CFrame.new(-12,0,-8))
+table.insert(ai,CFrame.new(-3,0,-20))
+table.insert(ai,CFrame.new(0,0,-39))
+
+
+elseif aj=="Rooms_Empty1"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(0,0,-54))
+
+
+elseif aj=="Rooms_Lockers1"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(0,0,-54))
+elseif aj=="Rooms_Lockers2"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(0,0,-64))
+elseif aj=="Rooms_Lockers3"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(6,0,-64))
+elseif aj=="Rooms_Lockers4"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(-6,0,-64))
+
+
+elseif aj=="Rooms_Curve1"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(10,0,-40))
+table.insert(ai,CFrame.new(12.13,0,-54))
+elseif aj=="Rooms_Curve2"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(10,0,-50))
+table.insert(ai,CFrame.new(12.13,0,-64))
+elseif aj=="Rooms_Curve3"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(20,0,-50))
+table.insert(ai,CFrame.new(22.13,0,-64))
+elseif aj=="Rooms_AltCurve1"then
+table.insert(ai,CFrame.new(0,0,-3))
+table.insert(ai,CFrame.new(-12.13,0,-54))
+elseif aj=="Rooms_AltCurve2"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(-12.13,0,-64))
+elseif aj=="Rooms_AltCurve3"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(-22.13,0,-64))
+
+
+elseif aj=="Rooms_Cubby1"then
+table.insert(ai,CFrame.new(0,0,-5))
+table.insert(ai,CFrame.new(7.5,0,-12.5))
+table.insert(ai,CFrame.new(7.5,0,-37.5))
+table.insert(ai,CFrame.new(-9.38,0,-54))
+elseif aj=="Rooms_Cubby2"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(6,0,-23.5))
+table.insert(ai,CFrame.new(6,0,-45))
+table.insert(ai,CFrame.new(-9.38,0,-64))
+elseif aj=="Rooms_AltCubby1"then
+
+if ak:FuzzyEq(Vector3.new(0,0,-54),0.05)then
+table.insert(ai,CFrame.new(-10,0,-20))
+table.insert(ai,CFrame.new(-10,0,-30))
+table.insert(ai,CFrame.new(0,0,-54))
+
+elseif ak:FuzzyEq(Vector3.new(9.38,0,-54),0.05)then
+table.insert(ai,CFrame.new(-5.75,0,-15))
+table.insert(ai,CFrame.new(-5.75,0,-35))
+table.insert(ai,CFrame.new(9.38,0,-54))
+end
+elseif aj=="Rooms_AltCubby2"then
+
+if ak:FuzzyEq(Vector3.new(0,0,-64),0.05)then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(-11.4,0,-35))
+table.insert(ai,CFrame.new(-11,0,-40))
+table.insert(ai,CFrame.new(0,0,-64))
+
+
+elseif ak:FuzzyEq(Vector3.new(9.38,0,-64),0.05)then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(-5,0,-26))
+table.insert(ai,CFrame.new(-5,0,-45))
+table.insert(ai,CFrame.new(9.38,0,-64))
+end
+
+
+elseif aj=="Rooms_Skinny1"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(-6,0,-35))
+table.insert(ai,CFrame.new(-6.13,0,-54))
+elseif aj=="Rooms_Skinny2"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(-6.13,0,-45))
+table.insert(ai,CFrame.new(-6.13,0,-64))
+elseif aj=="Rooms_AltSkinny1"then
+table.insert(ai,CFrame.new(6.13,0,-37.5))
+table.insert(ai,CFrame.new(6.13,0,-54))
+elseif aj=="Rooms_AltSkinny2"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(6.13,0,-45))
+table.insert(ai,CFrame.new(6.13,0,-64))
+
+
+elseif aj=="Rooms_Hallway1"then
+table.insert(ai,CFrame.new(-5,0,-8))
+table.insert(ai,CFrame.new(-5,0,-42))
+table.insert(ai,CFrame.new(0,0,-54))
+elseif aj=="Rooms_Hallway2"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(-5,0,-18.33))
+table.insert(ai,CFrame.new(-5,0,-52.5))
+table.insert(ai,CFrame.new(0,0,-64))
+
+
+elseif aj=="Rooms_Catwalk1"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(0,0,-56))
+elseif aj=="Rooms_Catwalk2"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(0,0,-58))
+elseif aj=="Rooms_Catwalk3"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(12,0,-17.5))
+table.insert(ai,CFrame.new(12,0,-66))
+elseif aj=="Rooms_Catwalk4"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(-12,0,-20))
+table.insert(ai,CFrame.new(-12,0,-66))
+
+
+elseif aj=="Rooms_Kitchen1"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(-10.5,0,-30))
+table.insert(ai,CFrame.new(0,0,-54))
+elseif aj=="Rooms_Kitchen2"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(-11,0,-30))
+table.insert(ai,CFrame.new(0,0,-64))
+
+
+elseif aj=="Rooms_Desk1"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(0,0,-54))
+elseif aj=="Rooms_Desk2"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(0,0,-64))
+elseif aj=="Rooms_Desk3"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(10,0,-64))
+
+
+elseif aj=="Rooms_Storage1"then
+table.insert(ai,CFrame.new(-9,0,-43.65))
+table.insert(ai,CFrame.new(0,0,-54))
+elseif aj=="Rooms_Storage2"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(-3.65,0,-40))
+table.insert(ai,CFrame.new(-11.7,0,-51.5))
+table.insert(ai,CFrame.new(-5.53,0,-57.49))
+table.insert(ai,CFrame.new(0,0,-64))
+elseif aj=="Rooms_Storage3"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(-18,0,-55.5))
+table.insert(ai,CFrame.new(-8,0,-64))
+elseif aj=="Rooms_Storage4"then
+table.insert(ai,CFrame.new(0,0,-10))
+table.insert(ai,CFrame.new(5.75,0,-30))
+table.insert(ai,CFrame.new(-3.34,0,-54.18))
+table.insert(ai,CFrame.new(8,0,-64))
+end
+end
+
+function ac.destroy(ah)
+ac.attached[ah.instance]=nil
+ae.destroy(ah)
+end
+
+
+local ah=function(ah)
+if Toggles["pathfinder.enabled"].Value then
+ac.new(ah)
+end
+end
+z:add(h.CurrentRooms.ChildAdded:Connect(ah))
 end
 
 
@@ -1487,38 +1826,38 @@ end
 
 
 
-o:SetWatermark"Linoria Community (TerminalVibes)"
-o:Notify"Loading UI..."
+p:SetWatermark"Linoria Community (TerminalVibes)"
+p:Notify"Loading UI..."
 
 do
-local ac=o:CreateWindow(h.." ("..i..")")
+local ad=p:CreateWindow(j.." ("..k..")")
 
 do
-local ad=ac:AddTab"Gameplay"
+local ae=ad:AddTab"Gameplay"
 
 do
-local ae=ad:AddLeftGroupbox"Character Mods"
-ae:AddToggle(
+local ah=ae:AddLeftGroupbox"Character Mods"
+ah:AddToggle(
 "character.sprint.enabled",
 {Text="Sprint Enabled",Default=false,Tooltip="Enables Sprinting by pressing the Keybind"}
 ):AddKeyPicker("character.sprint.keybind",{Text="Sprint",Default="LeftShift"})
-ae:AddSlider(
+ah:AddSlider(
 "character.sprint.speed",
 {Text="Sprint Boost (in seconds)",Min=0,Max=7.5,Default=0,Rounding=1,Suffix=" studs"}
 )
-ae:AddToggle(
+ah:AddToggle(
 "character.glow.enabled",
 {Text="Body Glow",Default=false,Tooltip="Adds a subtle glow for better vision"}
 )
-ae:AddSlider(
+ah:AddSlider(
 "character.glow.brightness",
 {Text="Glow Brightness",Min=0,Max=100,Default=0,Rounding=0,Suffix=""}
 )
 end
 
 do
-local ae=ad:AddLeftGroupbox"Gameplay Mods"
-ae:AddToggle("gameplay.a90.disable-movement",{
+local ah=ae:AddLeftGroupbox"Gameplay Mods"
+ah:AddToggle("gameplay.a90.disable-movement",{
 Text="A90 Movement Hook",
 Default=false,
 Tooltip="Disables movement when A90 appears.",
@@ -1526,30 +1865,44 @@ Tooltip="Disables movement when A90 appears.",
 end
 
 do
-local ae=ad:AddRightTabbox"Alerts"
+local ah=ae:AddRightTabbox"Alerts"
 
-local af=ae:AddTab"Alerts"
-af:AddToggle(
+local ai=ah:AddTab"Alerts"
+ai:AddToggle(
 "alerts.enabled",
 {Text="Alerts Enabled",Default=true,Tooltip="Master toggle for all script alerts."}
 )
-af:AddToggle("alerts.drawing",{
+ai:AddToggle("alerts.drawing",{
 Text="Use Drawing API",
 Default=true,
 Tooltip="Enables the drawing API for script alerts.",
 })
-af:AddToggle("alerts.audio",{
+ai:AddToggle("alerts.audio.enabled",{
 Text="Enable Sound",
 Default=true,
 Tooltip="Plays a sound when an important alert is triggered.",
 })
-
-local ag=ae:AddTab"Advanced"
-ag:AddToggle(
-"alerts.debug",
-{Text="Debug Alerts",Default=true,Tooltip="Enabled alerts related to script status."}
+ai:AddSlider(
+"alerts.audio.volume",
+{Text="Alert Volume",Min=1,Max=10,Default=6,Rounding=0,Suffix=""}
 )
-ag:AddToggle(
+ai:AddButton{
+Text="Test Alert",
+Func=function()
+ab(true,{
+message="This is a test alert!",
+duration=4,
+audio=true,
+})
+end,
+}
+
+local aj=ah:AddTab"Advanced"
+aj:AddToggle(
+"alerts.debug",
+{Text="Debug Alerts",Default=false,Tooltip="Enabled alerts related to script status."}
+)
+aj:AddToggle(
 "alerts.entity",
 {Text="Entity Alerts",Default=true,Tooltip="Enabled alerts about entities spawning."}
 )
@@ -1557,24 +1910,54 @@ end
 end
 
 do
-local ad=ac:AddTab"Blatant"
+local ae=ad:AddTab"Blatant"
 
 do
-local ae=ad:AddLeftGroupbox"Auto Loot"
-ae:AddToggle("auto-loot.enabled",{
+local ah=ae:AddLeftGroupbox"Pathfinder (Beta)"
+ah:AddToggle("pathfinder.enabled",{
 Text="Enabled",
 Default=false,
-Tooltip="Automatically loots items for you.",
-}):AddKeyPicker("auto-loot.keybind",{
-Text="Auto-loot",
-Default="F",
+Tooltip="Automatically finds the fastest path to the next room.",
+})
+ah:AddToggle("pathfinder.stop-on-exit",{
+Text="Stop on Checkpoints",
+Default=true,
+Tooltip="Stops the pathfinder when it reaches a checkpoint.",
+})
+ah:AddSlider("pathfinder.speed",{
+Text="Speed",
+Min=1,
+Max=30,
+Default=16,
+Rounding=0,
+Suffix=" studs",
 })
 end
 
 do
-local ae=ad:AddLeftGroupbox"Entity Hooks"
+local ah=ae:AddRightGroupbox"Auto Interact"
+ah:AddToggle("interact.enabled",{
+Text="Enabled",
+Default=false,
+Tooltip="Automatically loots items for you.",
+}):AddKeyPicker("interact.keybind",{
+Text="Auto-Interact",
+Default="F",
+})
+ah:AddDropdown("interact.filter",{
+Text="Interact Filter (Work In Progress)",
+Tooltip="Selected items will be ignored by the auto-loot.",
 
-ae:AddToggle("blatant.a90.remove",{
+Values={"Gold","Battery"},
+Default={},
+Multi=true,
+})
+end
+
+do
+local ah=ae:AddRightGroupbox"Entity Hooks"
+
+ah:AddToggle("blatant.a90.remove",{
 Text="Remove A90",
 Default=false,
 Tooltip="A90 will no longer spawn for you.",
@@ -1583,21 +1966,21 @@ end
 end
 
 do
-local ad=ac:AddTab"Visuals"
+local ae=ad:AddTab"Visuals"
 
 do
-local ae=ad:AddLeftTabbox"ESP"
+local ah=ae:AddLeftTabbox"ESP"
 
-local af=ae:AddTab"Entity ESP"
+local ai=ah:AddTab"Entity ESP"
 do
-af:AddToggle(
+ai:AddToggle(
 "esp.player.enabled",
 {Text="Player ESP",Default=true,Tooltip="ESP for other players"}
 ):AddColorPicker("esp.player.color",{
 Title="Player ESP Color",
 Default=Color3.new(1,1,1),
 })
-af:AddToggle(
+ai:AddToggle(
 "esp.rush.enabled",
 {Text="A60/A120 ESP",Default=true,Tooltip="ESP for both A60 and A120 entities"}
 )
@@ -1611,9 +1994,9 @@ Default=Color3.new(0.8,0,0),
 })
 end
 
-local ag=ae:AddTab"Object ESP"
+local aj=ah:AddTab"Object ESP"
 do
-ag:AddToggle("esp.door.enabled",{Text="Door ESP",Default=false,Tooltip="ESP for doors"})
+aj:AddToggle("esp.door.enabled",{Text="Door ESP",Default=false,Tooltip="ESP for doors"})
 :AddColorPicker("esp.door.default-color",{
 Title="Other Doors ESP Color",
 Default=Color3.new(0,0.3,0.75),
@@ -1622,7 +2005,7 @@ Default=Color3.new(0,0.3,0.75),
 Title="Current Door ESP Color",
 Default=Color3.new(0,1,0),
 })
-ag
+aj
 :AddToggle(
 "esp.locker.enabled",
 {Text="Locker ESP",Default=false,Tooltip="ESP for lockers"}
@@ -1631,14 +2014,14 @@ ag
 Title="Locker ESP Color",
 Default=Color3.new(0,1,0.9),
 })
-ag:AddToggle(
+aj:AddToggle(
 "esp.interactable.enabled",
 {Text="Interactable ESP",Default=true,Tooltip="ESP for interactable items"}
 ):AddColorPicker("esp.interactable.color",{
 Title="Interactable ESP Color",
 Default=Color3.new(1,1,1),
 })
-ag:AddToggle(
+aj:AddToggle(
 "esp.obtainable.enabled",
 {Text="Obtainable ESP",Default=true,Tooltip="ESP for items that can be picked up"}
 ):AddColorPicker("esp.obtainable.color",{
@@ -1649,21 +2032,21 @@ end
 end
 
 do
-local ae=ad:AddLeftGroupbox"Gold ESP"
-ae:AddToggle(
+local ah=ae:AddLeftGroupbox"Gold ESP"
+ah:AddToggle(
 "esp.gold.enabled",
 {Text="Gold ESP",Default=true,Tooltip="ESP for items that can be picked up"}
 ):AddColorPicker("esp.gold.color",{
 Title="Gold ESP Color",
 Default=Color3.new(1,1,0),
 })
-ae:AddInput("esp.gold.format",{
+ah:AddInput("esp.gold.format",{
 Text="Custom Label",
 Default="Gold [{amount}]",
 Placeholder="Label Text",
 Tooltip="Custom text to display for gold. {amount} will be replaced with the amount of gold.",
 })
-ae:AddSlider("esp.gold.minimum",{
+ah:AddSlider("esp.gold.minimum",{
 Text="Minimum Gold",
 Default=10,
 Min=0,
@@ -1672,25 +2055,53 @@ Rounding=0,
 Tooltip="Minimum amount of gold to display",
 })
 end
+
+do
+local ah=ae:AddRightGroupbox"Lighting"
+ah:AddButton{
+Text="Full Bright",
+Func=function()
+b.Ambient=Color3.fromRGB(200,200,200)
+b.Brightness=1
+b.ClockTime=12
+z:add(b:GetPropertyChangedSignal"Ambient":Connect(function()
+local ai=Color3.fromRGB(200,200,200)
+if b.Ambient~=ai then
+b.Ambient=ai
+end
+end))
+z:add(b:GetPropertyChangedSignal"Brightness":Connect(function()
+if b.Brightness~=1 then
+b.Brightness=1
+end
+end))
+z:add(b:GetPropertyChangedSignal"ClockTime":Connect(function()
+if b.ClockTime~=12 then
+b.ClockTime=12
+end
+end))
+end,
+}
+end
 end
 
 do
-local ad=ac:AddTab"Credits"
+local ae=ad:AddTab"Credits"
 
-local ae=ad:AddLeftGroupbox"Credits"
-ae:AddLabel"TerminalVibes - Creator"
-ae:AddLabel"Inori @v3rm - UI Library"
-ae:AddDivider()
-ae:AddLabel"Contributors:"
-ae:AddLabel"> IAmAGoodScammer @v3rm"
-ae:AddLabel"> brickmane @v3rm"
-ae:AddLabel"> yuuiz#1336 @Discord"
-ae:AddDivider()
-ae:AddLabel"Donators:"
-ae:AddLabel"> reversing#2937 @Discord"
+local ah=ae:AddLeftGroupbox"Credits"
+ah:AddLabel"TerminalVibes - Creator"
+ah:AddLabel"Inori @v3rm - UI Library"
+ah:AddDivider()
+ah:AddLabel"Contributors:"
+ah:AddLabel"> reversing#2937 @discord"
+ah:AddLabel"> yuuiz#1336 @discord"
+ah:AddLabel"> Ferris#8276 @discord"
+ah:AddLabel"> Lythicals#0001 @discord"
+ah:AddLabel"> brickmane @v3rm"
+ah:AddLabel"> BlockOfGaming"
 
-local af=ad:AddRightGroupbox"Socials"
-af:AddButton{
+local ai=ae:AddRightGroupbox"Socials"
+ai:AddButton{
 Text="Discord Server",
 Func=function()
 setclipboard"https://discord.gg/8PATx7UKXZ"
@@ -1699,37 +2110,37 @@ end,
 end
 
 do
-local ad=ac:AddTab"Settings"
+local ae=ad:AddTab"Settings"
 
-q:SetLibrary(o)
-p:SetLibrary(o)
+r:SetLibrary(p)
+q:SetLibrary(p)
 
-q:SetFolder(j)
-p:SetFolder(j.."/"..k)
+r:SetFolder(l)
+q:SetFolder(l.."/"..m)
 
-p:IgnoreThemeSettings()
-p:SetIgnoreIndexes{"MenuKeybind"}
+q:IgnoreThemeSettings()
+q:SetIgnoreIndexes{"MenuKeybind"}
 
-p:BuildConfigSection(ad)
-q:ApplyToTab(ad)
+q:BuildConfigSection(ae)
+r:ApplyToTab(ae)
 
-local ae=ad:AddLeftGroupbox"Menu"
-ae:AddButton("Unload",function()
-o:Unload()
+local ah=ae:AddLeftGroupbox"Menu"
+ah:AddButton("Unload",function()
+p:Unload()
 end)
-ae:AddLabel"Menu bind":AddKeyPicker("MenuKeybind",{Default="End",NoUI=true,Text="Menu keybind"})
+ah:AddLabel"Menu bind":AddKeyPicker("MenuKeybind",{Default="End",NoUI=true,Text="Menu keybind"})
 
-ae:AddToggle("Keybinds",{Text="Show Keybinds Menu",Default=true}):OnChanged(function()
-o.KeybindFrame.Visible=Toggles.Keybinds.Value
+ah:AddToggle("Keybinds",{Text="Show Keybinds Menu",Default=true}):OnChanged(function()
+p.KeybindFrame.Visible=Toggles.Keybinds.Value
 end)
-ae:AddToggle("Watermark",{Text="Show Watermark",Default=true}):OnChanged(function()
-o:SetWatermarkVisibility(Toggles.Watermark.Value)
+ah:AddToggle("Watermark",{Text="Show Watermark",Default=true}):OnChanged(function()
+p:SetWatermarkVisibility(Toggles.Watermark.Value)
 end)
 end
 end
 
-o:Notify"UI Built! [Right Ctrl or Right Shift]"
-p:LoadAutoloadConfig()
+p:Notify"UI Built! [Right Ctrl or Right Shift]"
+q:LoadAutoloadConfig()
 
 
 
@@ -1740,28 +2151,20 @@ p:LoadAutoloadConfig()
 
 
 
-local ac=function()
-u=f.CurrentCamera or u
+local ad=function()
+v=h.CurrentCamera or v
 end
-y:add(f:GetPropertyChangedSignal"CurrentCamera":Connect(ac))
-
-local ad=function(ad)
-local ae=ad.Name
-if ae=="A60"then
-D.new(ad)
-elseif ae=="A120"then
-E.new(ad)
-end
-end
-y:add(f.ChildAdded:Connect(ad))
+z:add(h:GetPropertyChangedSignal"CurrentCamera":Connect(ad))
 
 local ae=function(ae)
-K.new(ae)
+local ah=ae.Name
+if ah=="A60"then
+E.new(ae)
+elseif ah=="A120"then
+F.new(ae)
 end
-y:add(f.CurrentRooms.ChildAdded:Connect(ae))
-for af,ag in ipairs(f.CurrentRooms:GetChildren())do
-ae(ag)
-end local ah=function()
+end
+z:add(h.ChildAdded:Connect(ae))local ah=function()
 
 
 
@@ -1778,12 +2181,12 @@ if Toggles["gameplay.a90.disable-movement"].Value then
 task.wait(0.9)
 
 
-local ah=A.attached
+local ah=B.attached
 ah.root.AssemblyLinearVelocity=Vector3.zero
-g:SendKeyEvent(false,Enum.KeyCode.W,false,game)
-g:SendKeyEvent(false,Enum.KeyCode.A,false,game)
-g:SendKeyEvent(false,Enum.KeyCode.S,false,game)
-g:SendKeyEvent(false,Enum.KeyCode.D,false,game)
+i:SendKeyEvent(false,Enum.KeyCode.W,false,game)
+i:SendKeyEvent(false,Enum.KeyCode.A,false,game)
+i:SendKeyEvent(false,Enum.KeyCode.S,false,game)
+i:SendKeyEvent(false,Enum.KeyCode.D,false,game)
 
 
 a:BindAction("a90.freeze",function()
@@ -1791,81 +2194,97 @@ return Enum.ContextActionResult.Sink
 end,false,Enum.KeyCode.W,Enum.KeyCode.A,Enum.KeyCode.S,Enum.KeyCode.D,Enum.KeyCode.E)
 
 
-local P=u.CFrame
-local Q=d.RenderStepped:Connect(function()
-u.CFrame=P
+local ai=v.CFrame
+local aj=f.RenderStepped:Connect(function()
+v.CFrame=ai
 end)
 
 
 task.wait(0.4)
-Q:Disconnect()
+aj:Disconnect()
 a:UnbindAction"a90.freeze"
 end end
 
-y:add(w.A90.OnClientEvent:Connect(ah))
+z:add(x.A90.OnClientEvent:Connect(ah))
 
 
 
-local P=function(P)
-for Q,R in ipairs(L)do
-for S,T in pairs(R.attached)do
-T:onTick(P)
+local ai=function(ai)
+for aj,ak in ipairs(M)do
+for al,am in pairs(ak.attached)do
+am:onTick(ai)
 end
 end
 end
-local Q=function(Q)
-for R,S in ipairs(M)do
-for T,U in pairs(S.attached)do
-U:onRender(Q)
+local aj=function(aj)
+for ak,al in ipairs(N)do
+for am,an in pairs(al.attached)do
+an:onRender(aj)
 end
 end
 end
-local R=function(R,S)
-for T,U in ipairs(N)do
-for V,W in pairs(U.attached)do
-W:onPhysics(R,S)
+local ak=function(ak,al)
+for am,an in ipairs(O)do
+for Q,R in pairs(an.attached)do
+R:onPhysics(ak,al)
 end
 end
-local V=A.attached
-if V then
-V:onPhysics(R,S)
+local Q=B.attached
+if Q then
+Q:onPhysics(ak,al)
 end
 end
 
-y:add(d.Heartbeat:Connect(P))
-y:add(d.RenderStepped:Connect(Q))
-y:add(d.Stepped:Connect(R))
+z:add(f.Heartbeat:Connect(ai))
+z:add(f.RenderStepped:Connect(aj))
+z:add(f.Stepped:Connect(ak))
 
 
+
+Options["alerts.audio.volume"]:OnChanged(function()
+y.Volume=Options["alerts.audio.volume"].Value
+end)
+
+Toggles["pathfinder.enabled"]:OnChanged(function()
+if Toggles["pathfinder.enabled"].Value then
+local al=h.CurrentRooms:FindFirstChild(tostring(w.LatestRoom.Value+1))
+if al then
+ac.new(al)
+end
+else
+for al,am in pairs(ac.attached)do
+am:destroy()
+end
+end
+end)
 
 Toggles["blatant.a90.remove"]:OnChanged(function()
-local S={}
-for T,U in ipairs(getconnections(w.A90.OnClientEvent))do
-local V=U.Function
-if V then
-local W=getfenv(V).script
-if W and W.Name=="RemoteListener"then
-table.insert(S,U)
+local al={}
+for am,an in ipairs(getconnections(x.A90.OnClientEvent))do
+local Q=an.Function
+if Q then
+local R=getfenv(Q).script
+if R and R.Name=="RemoteListener"then
+table.insert(al,an)
 end
 end
 end
 
 if Toggles["blatant.a90.remove"].Value then
-for V,W in ipairs(S)do
-W:Disable()
+for Q,R in ipairs(al)do
+R:Disable()
 end
 else
-for V,W in ipairs(S)do
-W:Enable()
+for Q,R in ipairs(al)do
+R:Enable()
 end
 end
 end)
 
-o:OnUnload(function()
-y:destroy()
-getgenv()[k..i]=nil
-local S={
-B,
+p:OnUnload(function()
+z:destroy()
+getgenv()[m..k]=nil
+local al={
 C,
 D,
 E,
@@ -1873,15 +2292,16 @@ F,
 G,
 H,
 I,
-K,
+J,
+L,
 }
-for T,U in ipairs(S)do
-for V,W in pairs(U.attached)do
-W:destroy()
+for am,an in ipairs(al)do
+for Q,R in pairs(an.attached)do
+R:destroy()
 end
 end
-if A.attached then
-A.attached:destroy()
+if B.attached then
+B.attached:destroy()
 end
 end)
 
@@ -1898,27 +2318,27 @@ end)
 
 
 
-table.insert(M,B)
-table.insert(M,D)
-table.insert(M,E)
-table.insert(M,F)
-table.insert(M,G)
-table.insert(M,H)
+table.insert(N,C)
+table.insert(N,E)
+table.insert(N,F)
+table.insert(N,G)
+table.insert(N,H)
+table.insert(N,I)
+table.insert(O,ac)
 
-x.Name="Main"
-x.SoundId="rbxassetid://6026984224"
-x.Volume=6
-x.Parent=e
+y.Name="Main"
+y.SoundId="rbxassetid://6026984224"
+y.Parent=g
 
 do
-local S=game.PlaceId
-local T=game.PlaceVersion
-local U=l[S]
-if T>U then
-o:Notify"Game has been updated! Please be careful when using this script."
-o:Notify"The place ID and Version has been copied to your clipboard."
-setclipboard("["..tostring(S).."] = "..tostring(T)..",")
+local al=game.PlaceId
+local am=game.PlaceVersion
+local an=n[al]
+if am>an then
+p:Notify"Game has been updated! Please be careful when using this script."
+p:Notify"The place ID and Version has been copied to your clipboard."
+setclipboard("["..tostring(al).."] = "..tostring(am)..",")
 end
 end
 
-return o:Notify("["..h.."] Loaded! ("..i..")")
+return p:Notify("["..j.."] Loaded! ("..k..")")
