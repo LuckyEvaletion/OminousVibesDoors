@@ -51,7 +51,7 @@ end
 
 
 
-local o="https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/"
+local o="https://raw.githubusercontent.com/mstudio45/LinoriaLib/main/"
 
 local p=loadstring(game:HttpGet(o.."Library.lua"))()
 local q=loadstring(game:HttpGet(o.."addons/SaveManager.lua"))()
